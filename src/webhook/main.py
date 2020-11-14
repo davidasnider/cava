@@ -43,8 +43,8 @@ class Motion(BaseModel):
         ..., title="Device name", min_length=1, description="Device detecting motion"
     )
 
-    class Config:
-        schema_extra = {"example": {"device": "driveway-cam"}}
+    class Config:  # dead: disable
+        schema_extra = {"example": {"device": "driveway-cam"}}  # dead: disable
 
 
 @app.put("/api/v01/motion")
