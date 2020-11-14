@@ -13,11 +13,9 @@ spec:
       labels:
         app: rabbitmq
     spec:
-      nodeSelector:
-        kubernetes.io/arch: amd64
       containers:
       - name: rabbitmq
-        image: rabbitmq
+        image: docker.io/rabbitmq:3.8.9-alpine
         env:
         - name: RABBITMQ_DEFAULT_USER
           value: "cava"
