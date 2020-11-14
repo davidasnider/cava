@@ -104,7 +104,6 @@ jobs:
           cd k8s/bases
           kustomize edit set image ${{ steps.build-prep.outputs.tags }}
           # Temp workaround for bases and resources
-          sed -i 's/^resources:$/bases:/g' kustomization.yaml
           cat kustomization.yaml
 
       - name: Commit files
