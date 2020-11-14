@@ -6,7 +6,7 @@ import pika
 import os
 
 
-def callback(channel, method, properties, body):
+def callback(channel, method, properties, body):  # dead: disable
     """
     stdout print of incoming messages
     """
