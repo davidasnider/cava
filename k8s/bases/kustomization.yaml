@@ -1,10 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
+# - metrics-pusher-deployment.yaml
+bases:
 - rabbitmq-deployment.yaml
 - rabbitmq-service.yaml
 - webhook-deployment.yaml
 - webhook-service.yaml
-# - metrics-pusher-deployment.yaml
 - secrets.yaml
+images:
+- name: ghcr.io/davidasnider/cava/webhook
+  newTag: v1.0.1
