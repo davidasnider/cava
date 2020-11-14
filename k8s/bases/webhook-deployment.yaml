@@ -20,7 +20,7 @@ spec:
         command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
       containers:
       - name: webhook
-        image: registry.thesniderpad.com/cava-webhook:latest
+        image: ghcr.io/davidasnider/cava/webhook:latest
         resources:
           limits:
             memory: "128Mi"
