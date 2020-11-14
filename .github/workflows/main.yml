@@ -157,10 +157,21 @@ jobs:
 
       - name: Update kubernetes resources
         run: |
+          # Do base image updates
           cd k8s/bases
           kustomize edit set image ${{ steps.build-prep-webhook.outputs.tags }}
+          cat kustomization.yaml
+
+          # Do dev image updates
+          cd ../dev
+          kustomize edit set image ${{ steps.build-prep-webhook.outputs.tags }}
           kustomize edit set image ${{ steps.build-prep-reader.outputs.tags }}
-          # Temp workaround for bases and resources
+          cat kustomization.yaml
+
+          # Do prod image updates
+          cd ../prod
+          kustomize edit set image ${{ steps.build-prep-webhook.outputs.tags }}
+          kustomize edit set image ${{ steps.build-prep-reader.outputs.tags }}
           cat kustomization.yaml
 
       - name: Commit files

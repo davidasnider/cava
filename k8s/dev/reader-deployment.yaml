@@ -18,7 +18,7 @@ spec:
 
       containers:
       - name: reader
-        image: registry.thesniderpad.com/cava-reader:latest
+        image: ghcr.io/davidasnider/cava/reader:latest
         resources:
           limits:
             memory: "128Mi"
