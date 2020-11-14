@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reader
+spec:
+  selector:
+    matchLabels:
+      app: reader
+  template:
+    metadata:
+      labels:
+        app: reader
+    spec:
+      initContainers:
+      - name: init-reader-server
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
+
+      containers:
+      - name: reader
+        image: registry.thesniderpad.com/cava-reader:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

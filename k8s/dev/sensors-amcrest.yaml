@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "bedroom-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent

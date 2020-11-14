@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-pusher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-pusher
+  template:
+    metadata:
+      labels:
+        app: metrics-pusher
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      initContainers:
+      - name: init-metrics-pusher-server
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nc -zv -w 1 webhook-service 5000; do echo waiting for webhook-service; sleep 2; done;']
+      containers:
+      - name: metrics-pusher
+        image: registry.thesniderpad.com/cava-metrics-pusher:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+        command:
+        - "python"
+        args:
+        - "metrics_pusher.py"
+        imagePullPolicy: IfNotPresent
+        readinessProbe:
+          exec:
+            command:
+            - "true"
+          initialDelaySeconds: 5
+          periodSeconds: 5

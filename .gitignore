@@ -1,0 +1,6 @@
+.vscode
+.venv
+__pycache__
+.DS_Store
+passwords.sh
+k8s/bases/secrets.yaml

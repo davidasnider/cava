@@ -1,0 +1,43 @@
+@startuml
+
+node "Emmitters" {
+    [Webhook Emmitter]
+    [Icinga Emmitter]
+}
+
+database "RabbitMQ" {
+    [Message Exchange]
+    [Correlation Exchange]
+    [Action Exchange]
+}
+
+node "Processors" {
+    [Transformation Processor]
+    [Icinga Processor]
+    [Correlation Processor]
+    [Self Heal Processor]
+    [Metrics Processor]
+}
+
+node "Executors" {
+    [Repair Executor]
+    [Metrics Recorder]
+}
+
+HTTP --> [Webhook Emmitter] : Any HTTP call
+Icinga --> [Icinga Emmitter] : Icinga Alerts
+[Icinga Emmitter] --> [Message Exchange]
+[Webhook Emmitter] --> [Message Exchange]
+[Message Exchange] --> [Icinga Processor] : Type: Icinga
+[Message Exchange] --> [Transformation Processor] : Type: Webhook
+[Icinga Processor] --> [Correlation Exchange]
+[Transformation Processor] --> [Correlation Exchange]
+[Correlation Exchange] --> [Correlation Processor]
+[Correlation Processor] --> [Action Exchange] : Metric\nand Heal
+[Action Exchange] --> [Self Heal Processor] : Type: Heal
+[Self Heal Processor] --> [Repair Executor]
+[Action Exchange] --> [Metrics Processor] : Type: Metric
+[Metrics Processor] --> [Metrics Recorder]
+
+
+@enduml

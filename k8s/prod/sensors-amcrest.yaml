@@ -1,0 +1,450 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-driveway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-driveway
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-driveway
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-driveway
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "driveway-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-hottub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-hottub
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-hottub
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-hottub
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "hottub-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-sideyard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-sideyard
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-sideyard
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-sideyard
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "sideyard-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-backyard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-backyard
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-backyard
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-backyard
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "backyard-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-kitchen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-kitchen
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-kitchen
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-kitchen
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "kitchen-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-diningroom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-diningroom
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-diningroom
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-diningroom
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "diningroom-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-livingroom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-livingroom
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-livingroom
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-livingroom
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "livingroom-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-bedroom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-bedroom
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-bedroom
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-bedroom
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "bedroom-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-bedroomdoor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-bedroomdoor
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-bedroomdoor
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-bedroomdoor
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "bedroomdoor-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-basement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-basement
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-basement
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-basement
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "basement-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-amcrest-basementpatio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-amcrest-basementpatio
+  template:
+    metadata:
+      labels:
+        app: sensor-amcrest-basementpatio
+        base_app: sensor-amcrest
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm
+      containers:
+      - name: sensor-amcrest-basementpatio
+        image: registry.thesniderpad.com/cava-sensor:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_URI
+          value: "/api/v01/motion"
+        - name: CAVA_CAMERA
+          value: "basementpatio-cam.thesniderpad.com"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CAVA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAMERA_PASS
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent

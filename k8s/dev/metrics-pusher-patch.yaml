@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-pusher
+spec:
+  template:
+    spec:
+      containers:
+        - name: metrics-pusher
+          command:
+          - "python"
+          args:
+          - "-m"
+          - "ptvsd"
+          - "--port"
+          - "3000"
+          - "--host"
+          - "0.0.0.0"
+          - "metrics_pusher.py"
