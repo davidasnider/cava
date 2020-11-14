@@ -32,7 +32,7 @@ jobs:
       - name: Gitleaks
         uses: zricethezav/gitleaks-action@v1.1.4
 
-  build:
+  build-webhook:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -64,7 +64,7 @@ jobs:
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
-      - name: Build and push
+      - name: Build and push webhook
         uses: docker/build-push-action@v2
         with:
           context: ./src/webhook
@@ -73,15 +73,71 @@ jobs:
           push: true
           tags: ${{ steps.build-prep.outputs.tags }}
 
-  deploy:
+  build-reader:
     runs-on: ubuntu-latest
-    needs: build
-
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+
       - name: Set version tags
         id: build-prep
         run: |
+          DOCKER_IMAGE=ghcr.io/davidasnider/cava/reader
+          VERSION=noop
+          if [[ $GITHUB_REF == refs/pull/* ]]; then
+            VERSION=v1.0.${{ github.event.number }}
+          fi
+          TAGS="${DOCKER_IMAGE}:${VERSION}"
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=tags::${TAGS}
+          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+      - name: Build and push reader
+        uses: docker/build-push-action@v2
+        with:
+          context: ./src/reader
+          file: ./src/reader/Dockerfile
+          platforms: linux/amd64,linux/arm/v7
+          push: true
+          tags: ${{ steps.build-prep.outputs.tags }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+    - build-webhook
+    - build-reader
+
+    steps:
+      - name: Set version tags webhook
+        id: build-prep-webhook
+        run: |
           DOCKER_IMAGE=ghcr.io/davidasnider/cava/webhook
+          VERSION=noop
+          if [[ $GITHUB_REF == refs/pull/* ]]; then
+            VERSION="v1.0.${{ github.event.number }}"
+          fi
+          TAGS="${DOCKER_IMAGE}:${VERSION}"
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=tags::${TAGS}
+          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+      - name: Set version tags reader
+        id: build-prep-reader
+        run: |
+          DOCKER_IMAGE=ghcr.io/davidasnider/cava/reader
           VERSION=noop
           if [[ $GITHUB_REF == refs/pull/* ]]; then
             VERSION="v1.0.${{ github.event.number }}"
@@ -102,7 +158,8 @@ jobs:
       - name: Update kubernetes resources
         run: |
           cd k8s/bases
-          kustomize edit set image ${{ steps.build-prep.outputs.tags }}
+          kustomize edit set image ${{ steps.build-prep-webhook.outputs.tags }}
+          kustomize edit set image ${{ steps.build-prep-reader.outputs.tags }}
           # Temp workaround for bases and resources
           cat kustomization.yaml
 
@@ -123,7 +180,6 @@ jobs:
     needs:
       - pre-commit
       - gitleaks
-      - build
       - deploy
     steps:
       - uses: hmarr/auto-approve-action@v2.0.0
