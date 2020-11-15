@@ -13,8 +13,6 @@ spec:
         app: sensor-amcrest-driveway
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-driveway
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -55,8 +53,6 @@ spec:
         app: sensor-amcrest-hottub
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-hottub
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -96,8 +92,6 @@ spec:
         app: sensor-amcrest-sideyard
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-sideyard
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -137,8 +131,6 @@ spec:
         app: sensor-amcrest-backyard
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-backyard
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -178,8 +170,6 @@ spec:
         app: sensor-amcrest-kitchen
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-kitchen
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -219,8 +209,6 @@ spec:
         app: sensor-amcrest-diningroom
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-diningroom
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -260,8 +248,6 @@ spec:
         app: sensor-amcrest-livingroom
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-livingroom
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -301,8 +287,6 @@ spec:
         app: sensor-amcrest-bedroom
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-bedroom
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -342,8 +326,6 @@ spec:
         app: sensor-amcrest-bedroomdoor
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-bedroomdoor
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -383,8 +365,6 @@ spec:
         app: sensor-amcrest-basement
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-basement
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
@@ -424,8 +404,6 @@ spec:
         app: sensor-amcrest-basementpatio
         base_app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-basementpatio
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest

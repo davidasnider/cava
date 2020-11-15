@@ -12,8 +12,6 @@ spec:
       labels:
         app: sensor-amcrest
     spec:
-      nodeSelector:
-        kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest

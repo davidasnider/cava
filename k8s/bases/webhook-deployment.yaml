@@ -12,8 +12,6 @@ spec:
       labels:
         app: webhook
     spec:
-      nodeSelector:
-        kubernetes.io/arch: amd64
       initContainers:
       - name: init-webhook-server
         image: busybox:1.28
