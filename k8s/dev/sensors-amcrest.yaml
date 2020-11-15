@@ -16,7 +16,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
