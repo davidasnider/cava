@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: webhook
 spec:
-  replicas: 2
+  replicas: 3
   template:
     spec:
       containers:
@@ -15,5 +15,3 @@ spec:
             labelSelector:
               matchLabels:
                 app: webhook
-      nodeSelector:
-        kubernetes.io/arch: arm
