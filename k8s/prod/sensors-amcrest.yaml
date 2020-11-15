@@ -17,7 +17,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-driveway
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -59,7 +59,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-hottub
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -100,7 +100,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-sideyard
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -141,7 +141,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-backyard
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -182,7 +182,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-kitchen
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -223,7 +223,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-diningroom
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -264,7 +264,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-livingroom
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -305,7 +305,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-bedroom
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -346,7 +346,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-bedroomdoor
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -387,7 +387,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-basement
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
@@ -428,7 +428,7 @@ spec:
         kubernetes.io/arch: arm
       containers:
       - name: sensor-amcrest-basementpatio
-        image: registry.thesniderpad.com/cava-sensor:latest
+        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
