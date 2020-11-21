@@ -4,8 +4,15 @@ import json
 import logging
 from pydantic import BaseModel, Field
 from fastapi.encoders import jsonable_encoder
-from publisher import Publisher
+from cava.webhook.publisher import Publisher
 import os
+from cava.models.amcrest import event as amcrest_motion
+
+log_config = uvicorn.config.LOGGING_CONFIG
+log_config["formatters"]["access"]["fmt"] = "%(asctime)s: %(levelname)s: %(message)s"
+log_config["formatters"]["default"]["fmt"] = "%(asctime)s: %(levelname)s: %(message)s"
+log_config["formatters"]["access"]["datefmt"] = "%m/%d/%Y %I:%M:%S %p"
+log_config["formatters"]["default"]["datefmt"] = "%m/%d/%Y %I:%M:%S %p"
 
 logging.basicConfig(
     format="%(asctime)s: %(levelname)s: %(message)s",
@@ -14,7 +21,7 @@ logging.basicConfig(
 )
 logging.getLogger("pika").setLevel(logging.WARNING)
 logging.getLogger("werkzeug").setLevel(logging.WARNING)
-
+logging.getLogger("uvicorn").setLevel(logging.WARNING)
 
 # Declare our application
 app = FastAPI(
@@ -37,24 +44,15 @@ config = {
 publisher = Publisher(config)
 
 
-# Schema for our motion endpoint
-class Motion(BaseModel):
-    device: str = Field(
-        ..., title="Device name", min_length=1, description="Device detecting motion"
-    )
-
-    class Config:  # dead: disable
-        schema_extra = {"example": {"device": "driveway-cam"}}  # dead: disable
-
-
 @app.put("/api/v01/motion")
-async def motion(motion: Motion):
+async def motion(motion: amcrest_motion):
     """
     Accepts
     """
-    str_obj = json.dumps(jsonable_encoder(motion))
+    logging.info(f"Received motion from {motion.camera}")
+    str_obj = motion.json()
     publisher.publish(str_obj, "motion")
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, log_config=log_config, host="0.0.0.0", port=8000)

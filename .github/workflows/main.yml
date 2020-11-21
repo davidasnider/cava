@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.7'
+          python-version: '3.8'
       - uses: pre-commit/action@v2.0.0
 
   gitleaks:
@@ -67,8 +67,8 @@ jobs:
       - name: Build and push webhook
         uses: docker/build-push-action@v2
         with:
-          context: ./src/webhook
-          file: ./src/webhook/Dockerfile
+          context: ./src/cava
+          file: ./src/cava/webhook/Dockerfile
           platforms: linux/amd64,linux/arm/v7
           push: true
           tags: ${{ steps.build-prep.outputs.tags }}
@@ -108,8 +108,8 @@ jobs:
       - name: Build and push reader
         uses: docker/build-push-action@v2
         with:
-          context: ./src/reader
-          file: ./src/reader/Dockerfile
+          context: ./src/cava/
+          file: ./src/cava/reader/Dockerfile
           platforms: linux/amd64,linux/arm/v7
           push: true
           tags: ${{ steps.build-prep.outputs.tags }}
@@ -149,8 +149,8 @@ jobs:
       - name: Build and push amcrest-motion
         uses: docker/build-push-action@v2
         with:
-          context: ./src/sensors
-          file: ./src/sensors/Dockerfile
+          context: ./src/cava/
+          file: ./src/cava/sensors/Dockerfile
           platforms: linux/amd64,linux/arm/v7
           push: true
           tags: ${{ steps.build-prep.outputs.tags }}
@@ -160,6 +160,7 @@ jobs:
     needs:
     - build-webhook
     - build-reader
+    - build-amcrest-motion
 
     steps:
       - name: Set version tags webhook
