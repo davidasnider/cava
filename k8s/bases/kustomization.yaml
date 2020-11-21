@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: ghcr.io/davidasnider/cava/webhook
-  newTag: v1.0.10
+  newTag: v1.0.11
 resources:
 - rabbitmq-deployment.yaml
 - rabbitmq-service.yaml
