@@ -108,7 +108,7 @@ jobs:
       - name: Build and push reader
         uses: docker/build-push-action@v2
         with:
-          context: ./src/cava/reader
+          context: ./src/cava/
           file: ./src/cava/reader/Dockerfile
           platforms: linux/amd64,linux/arm/v7
           push: true
@@ -149,7 +149,7 @@ jobs:
       - name: Build and push amcrest-motion
         uses: docker/build-push-action@v2
         with:
-          context: ./src/cava/sensors
+          context: ./src/cava/
           file: ./src/cava/sensors/Dockerfile
           platforms: linux/amd64,linux/arm/v7
           push: true
