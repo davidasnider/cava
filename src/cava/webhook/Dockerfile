@@ -3,7 +3,7 @@ FROM python:3.8 AS compile-image
 
 RUN useradd -m -u 1000 webhook
 USER webhook
-COPY requirements.txt .
+COPY webhook/requirements.txt .
 RUN pip install --user -r requirements.txt
 
 # Runtime Image
@@ -24,8 +24,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PATH /home/webhook/.local/bin:$PATH
 
 WORKDIR /app
-ADD main.py /app/main.py
-ADD publisher.py /app/publisher.py
-ADD __init__.py /app/__init__.py
+ADD webhook /app/cava/webhook
+ADD models /app/cava/models
 
-CMD ["uvicorn", "--host", "0.0.0.0", "main:app"]
+CMD ["uvicorn", "--host", "0.0.0.0", "cava.webhook.main:app"]
