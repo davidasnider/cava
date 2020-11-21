@@ -3,7 +3,7 @@ FROM python:3.8 AS compile-image
 
 RUN useradd -m -u 1000 sensor
 USER sensor
-COPY requirements.txt .
+COPY sensors/requirements.txt .
 RUN pip install --user -r requirements.txt
 
 # Runtime Image
@@ -22,6 +22,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PATH /home/sensor/.local/bin:$PATH
 
 WORKDIR /app
-ADD amcrest_motion.py /app/amcrest_motion.py
+ADD sensors /app/cava/sensors
+ADD models /app/cava/models
 
-CMD ["python3", "amcrest_motion.py"]
+CMD ["python3", "-m", "cava.sensors.amcrest_motion"]
