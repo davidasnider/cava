@@ -3,7 +3,7 @@ FROM python:3.8-slim AS compile-image
 
 RUN useradd -m -u 1000 reader
 USER reader
-COPY requirements.txt .
+COPY reader/requirements.txt .
 RUN pip install --user -r requirements.txt && \
     pip install --user ptvsd
 
@@ -26,6 +26,6 @@ ENV PYTHONUNBUFFERED 1
 ENV PATH /home/reader/.local/bin:$PATH
 
 WORKDIR /app
-ADD reader.py /app/reader.py
+ADD reader /app/cava/reader
 
-CMD ["python", "-m", "ptvsd", "--port", "3000", "--host", "0.0.0.0", "reader.py"]
+CMD ["python", "-m", "ptvsd", "--port", "3000", "--host", "0.0.0.0", "cava/reader/reader.py"]

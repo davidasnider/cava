@@ -160,6 +160,7 @@ jobs:
     needs:
     - build-webhook
     - build-reader
+    - build-amcrest-motion
 
     steps:
       - name: Set version tags webhook
