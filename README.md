@@ -2,6 +2,17 @@
 
 Abbreviation of *Italian*: Automa cavaliere, lit. "Automaton knight", Leonardo's original robot
 
+## Deployment
+
+All packages are built using GitHub actions and kubernetest manifests
+automatically updated. The best way to quickly deploy is to use ansible which
+will take care of all secrets generation, etc.  Simply run:
+
+```bash
+cd ~/code/ansible
+ansible-playbook site.yaml --tags cava -l r307
+```
+
 ## Intention
 
 A system that will automatically react and fix issues identified in my home automation system.
@@ -53,7 +64,7 @@ Use the current Influxdb, Grafana, etc.
 Todo:
 
 - \[ \] Create a "Reader" to use during testing, add to Dev Kustomize
-- \[ \] Add logging to webhook
-- \[ \] Move secrets to k8s secrets and environment variables
+- \[x\] Add logging to webhook
+- \[x\] Move secrets to k8s secrets and environment variables
 - \[ \] Sanitize inputs (look at bleach)
 - \[ \] Add more tests to Webhook
