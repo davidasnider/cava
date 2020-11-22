@@ -1,5 +1,15 @@
 import pika
 import traceback
+import logging
+import pathlib
+
+LOGGING_CONFIG = pathlib.Path(__file__).parent.parent / "logging.conf"
+logging.config.fileConfig(LOGGING_CONFIG, disable_existing_loggers=False)
+# get root logger
+logger = logging.getLogger(
+    __name__
+)  # the __name__ resolve to "main" since we are at the root of the project
+# This will get the root logger since no logger in the configuration has this name.
 
 
 class Publisher:
@@ -19,14 +29,16 @@ class Publisher:
 
     def publish(self, message, routingKey="metrics"):
         connection = None
+        logging.debug(f"attempting publish of: {message}")
 
         try:
             connection = self._create_connection()
             channel = connection.channel()
-
+            logging.debug("connection complete")
             channel.exchange_declare(
                 exchange=self.config["exchangeName"], exchange_type="topic"
             )
+            logging.debug(f"publishing {message} to {routingKey}")
             channel.basic_publish(
                 exchange=self.config["exchangeName"],
                 routing_key=routingKey,
