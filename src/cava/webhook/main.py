@@ -6,22 +6,16 @@ from pydantic import BaseModel, Field
 from fastapi.encoders import jsonable_encoder
 from cava.webhook.publisher import Publisher
 import os
+import pathlib
 from cava.models.amcrest import event as amcrest_motion
 
-log_config = uvicorn.config.LOGGING_CONFIG
-log_config["formatters"]["access"]["fmt"] = "%(asctime)s: %(levelname)s: %(message)s"
-log_config["formatters"]["default"]["fmt"] = "%(asctime)s: %(levelname)s: %(message)s"
-log_config["formatters"]["access"]["datefmt"] = "%m/%d/%Y %I:%M:%S %p"
-log_config["formatters"]["default"]["datefmt"] = "%m/%d/%Y %I:%M:%S %p"
-
-logging.basicConfig(
-    format="%(asctime)s: %(levelname)s: %(message)s",
-    datefmt="%m/%d/%Y %I:%M:%S %p",
-    level=logging.INFO,
-)
-logging.getLogger("pika").setLevel(logging.WARNING)
-logging.getLogger("werkzeug").setLevel(logging.WARNING)
-logging.getLogger("uvicorn").setLevel(logging.WARNING)
+LOGGING_CONFIG = pathlib.Path(__file__).parent.parent / "logging.conf"
+logging.config.fileConfig(LOGGING_CONFIG, disable_existing_loggers=False)
+# get root logger
+logger = logging.getLogger(
+    __name__
+)  # the __name__ resolve to "main" since we are at the root of the project
+# This will get the root logger since no logger in the configuration has this name.
 
 # Declare our application
 app = FastAPI(
@@ -49,10 +43,11 @@ async def motion(motion: amcrest_motion):
     """
     Accepts
     """
-    logging.info(f"Received motion from {motion.camera}")
+    logger.info(f"Received motion from {motion.camera}")
     str_obj = motion.json()
+    logger.debug(f"motion object received: {motion}")
     publisher.publish(str_obj, "motion")
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, log_config=log_config, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
