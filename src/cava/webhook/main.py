@@ -28,7 +28,7 @@ app = FastAPI(
 config = {
     "exchangeName": "message_exchange",
     "userName": os.getenv("RABBITMQ_DEFAULT_USER"),
-    "password": os.getenv("CAVA_PASS"),
+    "password": os.getenv("RABBITMQ_DEFAULT_PASS"),
     "host": os.getenv("RABBITMQ_SERVICE_SERVICE_HOST"),
     "port": "5672",
     "virtualHost": "/",
