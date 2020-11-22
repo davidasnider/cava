@@ -15,8 +15,8 @@ commonLabels:
   env: dev
 images:
 - name: ghcr.io/davidasnider/cava/amcrest-motion
-  newTag: v1.0.12
+  newTag: v1.0.13
 - name: ghcr.io/davidasnider/cava/reader
-  newTag: v1.0.12
+  newTag: v1.0.13
 - name: ghcr.io/davidasnider/cava/webhook
-  newTag: v1.0.12
+  newTag: v1.0.13
