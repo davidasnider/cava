@@ -26,5 +26,6 @@ ENV PATH /home/webhook/.local/bin:$PATH
 WORKDIR /app
 ADD webhook /app/cava/webhook
 ADD models /app/cava/models
+ADD logging.conf /app/cava
 
 CMD ["uvicorn", "--host", "0.0.0.0", "cava.webhook.main:app"]
