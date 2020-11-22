@@ -1,3 +1,12 @@
+"""
+This simulates a motion detection event against the prod system.
+
+Run using the following command:
+
+cd ~/code/cava/src
+python3 -m cava.test.send_motion_prod
+"""
+
 from cava.models.amcrest import event as amcrest_motion
 import requests
 
