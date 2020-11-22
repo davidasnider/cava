@@ -28,4 +28,4 @@ ADD webhook /app/cava/webhook
 ADD models /app/cava/models
 ADD logging.conf /app/cava
 
-CMD ["uvicorn", "--host", "0.0.0.0", "cava.webhook.main:app"]
+CMD ["uvicorn", "--host", "0.0.0.0", "cava.webhook.main:app", "--log-config", "/app/cava/logging.conf"]
