@@ -19,6 +19,14 @@ spec:
       containers:
       - name: webhook
         image: ghcr.io/davidasnider/cava/webhook:latest
+        env:
+        - name: RABBITMQ_DEFAULT_USER
+          value: "cava"
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAVA_PASS
         resources:
           limits:
             memory: "128Mi"

@@ -27,12 +27,14 @@ app = FastAPI(
 # Configuration parameters for RabbitMQ
 config = {
     "exchangeName": "message_exchange",
-    "userName": "cava",
+    "userName": os.getenv("RABBITMQ_DEFAULT_USER"),
     "password": os.getenv("CAVA_PASS"),
     "host": os.getenv("RABBITMQ_SERVICE_SERVICE_HOST"),
     "port": "5672",
     "virtualHost": "/",
 }
+
+logger.debug(f"RabbitMQ Config: {config}")
 
 # Get a connection to RabbitMQ
 publisher = Publisher(config)

@@ -55,6 +55,7 @@ class Publisher:
                 connection.close()
 
     def _create_connection(self):
+        logging.debug(f"creating connection {self.config}")
         credentials = pika.PlainCredentials(
             self.config["userName"], self.config["password"]
         )
@@ -65,4 +66,5 @@ class Publisher:
             credentials,
         )
 
+        logging.debug(f"creating connection {self.config}")
         return pika.BlockingConnection(parameters)
