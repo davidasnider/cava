@@ -26,6 +26,7 @@ ENV PATH /home/webhook/.local/bin:$PATH
 WORKDIR /app
 ADD webhook /app/cava/webhook
 ADD models /app/cava/models
-ADD logging.conf /app/cava
+ADD logger_config.yaml /app/cava
+ADD __init__.py /app/cava
 
-CMD ["uvicorn", "--host", "0.0.0.0", "cava.webhook.main:app", "--log-config", "/app/cava/logging.conf"]
+CMD ["uvicorn", "--host", "0.0.0.0", "cava.webhook.main:app", "--log-config", "/app/cava/logger_config.yaml"]
