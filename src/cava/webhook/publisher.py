@@ -1,15 +1,8 @@
 import pika
 import traceback
-import logging
-import pathlib
+import cava
 
-LOGGING_CONFIG = pathlib.Path(__file__).parent.parent / "logging.conf"
-logging.config.fileConfig(LOGGING_CONFIG, disable_existing_loggers=False)
-# get root logger
-logger = logging.getLogger(
-    __name__
-)  # the __name__ resolve to "main" since we are at the root of the project
-# This will get the root logger since no logger in the configuration has this name.
+log = cava.log()
 
 
 class Publisher:
@@ -29,16 +22,16 @@ class Publisher:
 
     def publish(self, message, routingKey="metrics"):
         connection = None
-        logging.debug(f"attempting publish of: {message}")
+        log.debug(f"attempting publish of: {message}")
 
         try:
             connection = self._create_connection()
             channel = connection.channel()
-            logging.debug("connection complete")
+            log.debug("connection complete")
             channel.exchange_declare(
                 exchange=self.config["exchangeName"], exchange_type="topic"
             )
-            logging.debug(f"publishing {message} to {routingKey}")
+            log.debug(f"publishing {message} to {routingKey}")
             channel.basic_publish(
                 exchange=self.config["exchangeName"],
                 routing_key=routingKey,
@@ -55,7 +48,7 @@ class Publisher:
                 connection.close()
 
     def _create_connection(self):
-        logging.debug(f"creating connection {self.config}")
+        log.debug(f"creating connection {self.config}")
         credentials = pika.PlainCredentials(
             self.config["userName"], self.config["password"]
         )
@@ -66,5 +59,5 @@ class Publisher:
             credentials,
         )
 
-        logging.debug(f"creating connection {self.config}")
+        log.debug(f"creating connection {self.config}")
         return pika.BlockingConnection(parameters)

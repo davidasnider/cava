@@ -1,21 +1,14 @@
 from fastapi import FastAPI
 import uvicorn
 import json
-import logging
 from pydantic import BaseModel, Field
 from fastapi.encoders import jsonable_encoder
 from cava.webhook.publisher import Publisher
 import os
-import pathlib
 from cava.models.amcrest import event as amcrest_motion
+import cava
 
-LOGGING_CONFIG = pathlib.Path(__file__).parent.parent / "logging.conf"
-logging.config.fileConfig(LOGGING_CONFIG, disable_existing_loggers=False)
-# get root logger
-logger = logging.getLogger(
-    __name__
-)  # the __name__ resolve to "main" since we are at the root of the project
-# This will get the root logger since no logger in the configuration has this name.
+log = cava.log()
 
 # Declare our application
 app = FastAPI(
@@ -34,7 +27,7 @@ config = {
     "virtualHost": "/",
 }
 
-logger.debug(f"RabbitMQ Config: {config}")
+log.debug(f"RabbitMQ Config: {config}")
 
 # Get a connection to RabbitMQ
 publisher = Publisher(config)
@@ -45,11 +38,11 @@ async def motion(motion: amcrest_motion):
     """
     Accepts
     """
-    logger.info(f"Received motion from {motion.camera}")
+    log.info(f"Received motion from {motion.camera}")
     str_obj = motion.json()
-    logger.debug(f"motion object received: {motion}")
+    log.debug(f"motion object received: {motion}")
     publisher.publish(str_obj, "motion")
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="warning")
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_config=cava.log_config())
