@@ -13,6 +13,18 @@ cd ~/code/ansible
 ansible-playbook site.yaml --tags cava -l r307
 ```
 
+## Hacking
+
+### Webhook
+
+To hack on the primary webhook, simply use `make run-rabbitmq` followed by
+`make stop-rabbitmq`.
+
+### Sensor
+
+If you are debugging or writing an sensor, use `make run-webhook`. This will
+automatically start rabbitmq and kill it after the main process is killed.
+
 ## Intention
 
 A system that will automatically react and fix issues identified in my home automation system.
