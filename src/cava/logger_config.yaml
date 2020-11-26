@@ -1,0 +1,29 @@
+version: 1
+disable_existing_loggers: True
+handlers:
+  default:
+    class: logging.StreamHandler
+    formatter: precise
+    level: INFO
+    stream: ext://sys.stdout
+  short:
+    class: logging.StreamHandler
+    formatter: short
+    level: INFO
+    stream: ext://sys.stdout
+formatters:
+  precise:
+    format: '%(asctime)s loglevel=%(levelname)-6s logger=%(name)s %(funcName)s() L%(lineno)-4d %(message)s call_trace=%(pathname)s L%(lineno)-4d'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+  short:
+    format: '%(asctime)s loglevel=%(levelname)-6s logger=%(name)s %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+loggers:
+  uvicorn:
+    handlers: [ short ]
+    level: 'INFO'
+    propogate: True
+  cava:
+    handlers: [ default ]
+    level: 'INFO'
+    propogate: True
