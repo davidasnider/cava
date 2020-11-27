@@ -6,6 +6,7 @@ from fastapi.encoders import jsonable_encoder
 from cava.webhook.publisher import Publisher
 import os
 from cava.models.amcrest import event as amcrest_motion
+from cava.models.climacell import weather_forecast as weather
 import cava
 
 log = cava.log()
@@ -42,6 +43,17 @@ async def motion(motion: amcrest_motion):
     str_obj = motion.json()
     log.debug(f"motion object received: {motion}")
     publisher.publish(str_obj, "motion")
+
+
+@app.put("/api/v01/weather")
+async def weather(weather: weather):
+    """
+    See model definition for fields
+    """
+    log.info("Received weather forecast")
+    str_obj = weather.json()
+    log.debug(f"Weather object received: {weather}")
+    publisher.publish(str_obj, "weather")
 
 
 if __name__ == "__main__":

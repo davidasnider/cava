@@ -9,6 +9,7 @@ resources:
 - namespace.yaml
 - sensors-amcrest.yaml
 - ../bases
+- sensors-climacell.yaml
 
 namespace: cava
 

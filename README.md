@@ -24,11 +24,11 @@ A system that will automatically react and fix issues identified in my home auto
 * A message parsing processor function that will analyze and standardize events
 * A correlation function that will tie events to actions to be taken
 * An execution system that will take the prescribed actions
-* A metrics system to display things occuring through the platform
+* A metrics system to display things occurring through the platform
 
 ### Queueing System
 
-A simple system, likely RabbitMQ that can accept inputs on various channels/queues based on the originating event sytem. Our platform can rely on the fact that messages coming on a specific queue have certaoin attributes that can be parsed in a specific way.
+A simple system, likely RabbitMQ that can accept inputs on various channels/queues based on the originating event system. Our platform can rely on the fact that messages coming on a specific queue have certain attributes that can be parsed in a specific way.
 
 ### Emitters
 
@@ -47,7 +47,7 @@ Takes any json object and drops it into the Message Exchange queue with `type: w
 
 #### Icinga Emitter
 
-Listens to the Icinga API and emits messages to the Mesage Exchange queue with `type: icinga`
+Listens to the Icinga API and emits messages to the Message Exchange queue with `type: icinga`
 
 ### Message Parsing Processor
 
@@ -63,8 +63,8 @@ Use the current Influxdb, Grafana, etc.
 
 Todo:
 
-- \[ \] Create a "Reader" to use during testing, add to Dev Kustomize
-- \[x\] Add logging to webhook
-- \[x\] Move secrets to k8s secrets and environment variables
-- \[ \] Sanitize inputs (look at bleach)
-- \[ \] Add more tests to Webhook
+* \[ \] Create a "Reader" to use during testing, add to Dev Kustomize
+* \[x\] Add logging to webhook
+* \[x\] Move secrets to k8s secrets and environment variables
+* \[ \] Sanitize inputs (look at bleach)
+* \[ \] Add more tests to Webhook
