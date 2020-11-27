@@ -1,8 +1,5 @@
 from fastapi import FastAPI
 import uvicorn
-import json
-from pydantic import BaseModel, Field
-from fastapi.encoders import jsonable_encoder
 from cava.webhook.publisher import Publisher
 import os
 from cava.models.amcrest import event as amcrest_motion
