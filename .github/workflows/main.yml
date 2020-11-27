@@ -203,6 +203,7 @@ jobs:
     - build-reader
     - build-amcrest-motion
     - build-climacell
+    - pre-commit
 
     steps:
       - name: Set version tags webhook
