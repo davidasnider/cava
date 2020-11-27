@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-climacell
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensor-climacell
+  template:
+    metadata:
+      labels:
+        app: sensor-climacell
+    spec:
+      containers:
+      - name: sensor-climacell
+        image: ghcr.io/davidasnider/cava/climacell:latest
+        env:
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
+        - name: CAVA_USER
+          value: "admin"
+        - name: CLIMACELL_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CLIMACELL_API_KEY
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        imagePullPolicy: IfNotPresent
