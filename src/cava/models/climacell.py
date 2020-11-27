@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from typing import List, Optional
-from climacell_api.client import ClimacellApiClient
 import arrow
 import time
 import os
