@@ -18,10 +18,10 @@ patches:
 - path: loadbalancer-patch.yaml
 images:
 - name: ghcr.io/davidasnider/cava/amcrest-motion
-  newTag: v1.0.18
+  newTag: v1.0.19
 - name: ghcr.io/davidasnider/cava/climacell
-  newTag: v1.0.18
+  newTag: v1.0.19
 - name: ghcr.io/davidasnider/cava/reader
-  newTag: v1.0.18
+  newTag: v1.0.19
 - name: ghcr.io/davidasnider/cava/webhook
-  newTag: v1.0.18
+  newTag: v1.0.19
