@@ -2,7 +2,6 @@ from climacell_api.client import ClimacellApiClient
 import arrow
 import time
 import os
-from enum import Enum
 from cava.models.climacell import weather_forecast as weather
 from cava.models.climacell import observation as observation
 import requests
