@@ -1,43 +1,38 @@
 @startuml
 
-node "Emmitters" {
-    [Webhook Emmitter]
-    [Icinga Emmitter]
+node "Sensors" {
+    [Weather Emmitter]
+    [Motion Emmitter]
 }
 
-database "RabbitMQ" {
+node "Webhook" {
+    [ Listener 1]
+}
+
+database "RabbitMQ Message Exchange" as exchange {
     [Message Exchange]
-    [Correlation Exchange]
-    [Action Exchange]
+    [Correlation Queue]
+    [Action Queue]
 }
 
 node "Processors" {
-    [Transformation Processor]
-    [Icinga Processor]
     [Correlation Processor]
-    [Self Heal Processor]
-    [Metrics Processor]
 }
 
 node "Executors" {
-    [Repair Executor]
-    [Metrics Recorder]
+    [Indigo Executor]
+    ' [Metrics Publisher]
 }
 
-HTTP --> [Webhook Emmitter] : Any HTTP call
-Icinga --> [Icinga Emmitter] : Icinga Alerts
-[Icinga Emmitter] --> [Message Exchange]
-[Webhook Emmitter] --> [Message Exchange]
-[Message Exchange] --> [Icinga Processor] : Type: Icinga
-[Message Exchange] --> [Transformation Processor] : Type: Webhook
-[Icinga Processor] --> [Correlation Exchange]
-[Transformation Processor] --> [Correlation Exchange]
-[Correlation Exchange] --> [Correlation Processor]
-[Correlation Processor] --> [Action Exchange] : Metric\nand Heal
-[Action Exchange] --> [Self Heal Processor] : Type: Heal
-[Self Heal Processor] --> [Repair Executor]
-[Action Exchange] --> [Metrics Processor] : Type: Metric
-[Metrics Processor] --> [Metrics Recorder]
-
+HTTP --> Webhook : Any HTTP call
+[Weather Emmitter] --> Webhook: Http json
+[Motion Emmitter] --> Webhook: http json
+Webhook --> [Message Exchange]: incoming.motion topic
+Webhook --> [Message Exchange]: incoming.weather topic
+[Message Exchange] --> [Correlation Queue]: incoming.* topics
+[Message Exchange] --> [Action Queue]: action.* topics
+[Correlation Processor] <--> [Correlation Queue]: reads all topics
+[Correlation Processor] --> [Message Exchange]: indigo.* related actions
+[Indigo Executor] <--> [Action Queue]: indigo.* related actions
 
 @enduml
