@@ -31,12 +31,12 @@ A system that will automatically react and fix issues identified in my home auto
 
 ## Components
 
-* A simple queuing mechanism for capturing events.
-* One or more emitters
-* A message parsing processor function that will analyze and standardize events
-* A correlation function that will tie events to actions to be taken
-* An execution system that will take the prescribed actions
-* A metrics system to display things occurring through the platform
+- A simple queuing mechanism for capturing events.
+- One or more emitters
+- A message parsing processor function that will analyze and standardize events
+- A correlation function that will tie events to actions to be taken
+- An execution system that will take the prescribed actions
+- A metrics system to display things occurring through the platform
 
 ### Queueing System
 
@@ -52,10 +52,10 @@ Takes any json object and drops it into the Message Exchange queue with `type: w
 
 ##### High Level Specs
 
-* Should only accept json data, return 400 for bad (non json) data
-* Should only emit a copy of the json data to the queue
-* Should use /api/v1/:route\_key: where :route\_key: will be the routing key
-* No authentication
+- Should only accept json data, return 400 for bad (non json) data
+- Should only emit a copy of the json data to the queue
+- Should use /api/v1/:route\_key: where :route\_key: will be the routing key
+- No authentication
 
 #### Icinga Emitter
 
@@ -73,10 +73,14 @@ A system that has been instructed to react to messages of a specific type and in
 
 Use the current Influxdb, Grafana, etc.
 
+## Diagram
+
+![outline](queue_processing.svg)
+
 Todo:
 
-* \[ \] Create a "Reader" to use during testing, add to Dev Kustomize
-* \[x\] Add logging to webhook
-* \[x\] Move secrets to k8s secrets and environment variables
-* \[ \] Sanitize inputs (look at bleach)
-* \[ \] Add more tests to Webhook
+- \[ \] Create a "Reader" to use during testing, add to Dev Kustomize
+- \[x\] Add logging to webhook
+- \[x\] Move secrets to k8s secrets and environment variables
+- \[ \] Sanitize inputs (look at bleach)
+- \[ \] Add more tests to Webhook

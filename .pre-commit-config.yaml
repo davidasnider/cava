@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v3.3.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -22,12 +22,12 @@ repos:
       - id: black
         language_version: python3.8
   - repo: https://gitlab.com/pycqa/flake8
-    rev: "3.8.3"
+    rev: "3.8.4"
     hooks:
       - id: flake8
 
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.3.1 # Use the ref you want to point at
+    rev: 0.5.3 # Use the ref you want to point at
     hooks:
       - id: mdformat
         # optional

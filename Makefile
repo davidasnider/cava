@@ -9,9 +9,10 @@ run-rabbit:
 
 run-webhook: run-rabbit
 	(source .venv/bin/activate && \
+	set -a && \
 	source .env && \
 	cd src && \
-	python3 -m cava.webhook.main  && \
+	python3 -m cava.webhook.main && \
 	cd .. && \
 	make stop-rabbit)
 
@@ -19,4 +20,4 @@ stop-rabbit:
 	docker stop rabbitmq-management
 
 help:
-	@echo "Usage: make {run-rabbit|run-webhook|help}" 1>&2 && false
+	@echo "Usage: make {run-rabbit|run-webhook|stop-rabbit|help}" 1>&2 && false

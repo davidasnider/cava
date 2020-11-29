@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
-from cava.webhook.publisher import Publisher
-import os
+from cava.messages.publisher import Publisher
+
 from cava.models.amcrest import event as amcrest_motion
 from cava.models.climacell import weather_forecast as weather
 import cava
@@ -15,20 +15,8 @@ app = FastAPI(
     title="Cava",
 )
 
-# Configuration parameters for RabbitMQ
-config = {
-    "exchangeName": "message_exchange",
-    "userName": os.getenv("RABBITMQ_DEFAULT_USER"),
-    "password": os.getenv("RABBITMQ_DEFAULT_PASS"),
-    "host": os.getenv("RABBITMQ_SERVICE_SERVICE_HOST"),
-    "port": "5672",
-    "virtualHost": "/",
-}
-
-log.debug(f"RabbitMQ Config: {config}")
-
 # Get a connection to RabbitMQ
-publisher = Publisher(config)
+publisher = Publisher()
 
 
 @app.put("/api/v01/motion")
@@ -39,7 +27,7 @@ async def motion(motion: amcrest_motion):
     log.info(f"Received motion from {motion.camera}")
     str_obj = motion.json()
     log.debug(f"motion object received: {motion}")
-    publisher.publish(str_obj, "motion")
+    publisher.publish(str_obj, "incoming.motion")
 
 
 @app.put("/api/v01/weather")
@@ -50,7 +38,7 @@ async def weather(weather: weather):
     log.info("Received weather forecast")
     str_obj = weather.json()
     log.debug(f"Weather object received: {weather}")
-    publisher.publish(str_obj, "weather")
+    publisher.publish(str_obj, "incoming.weather")
 
 
 if __name__ == "__main__":
