@@ -1,6 +1,5 @@
 from amcrest import AmcrestCamera
 import requests
-import json
 import os
 import logging
 

@@ -1,9 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
-from climacell_api.client import ClimacellApiClient
-import arrow
-import time
-import os
+from typing import Optional
 import cava
 from enum import Enum
 from datetime import datetime

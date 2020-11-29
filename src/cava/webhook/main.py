@@ -4,6 +4,7 @@ import json
 from pydantic import BaseModel, Field
 from fastapi.encoders import jsonable_encoder
 from cava.messages.publisher import Publisher
+
 import os
 from cava.models.amcrest import event as amcrest_motion
 from cava.models.climacell import weather_forecast as weather
