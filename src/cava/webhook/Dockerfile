@@ -25,6 +25,7 @@ ENV PATH /home/webhook/.local/bin:$PATH
 
 WORKDIR /app
 ADD webhook /app/cava/webhook
+ADD messages /app/cava/messages
 ADD models /app/cava/models
 ADD logger_config.yaml /app/cava
 ADD __init__.py /app/cava

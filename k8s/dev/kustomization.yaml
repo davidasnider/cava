@@ -1,10 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-
 patches:
 - path: dev-patch.yaml
-# - path: metrics-pusher-patch.yaml
 
 resources:
 - reader-deployment.yaml
@@ -15,8 +13,8 @@ commonLabels:
   env: dev
 images:
 - name: ghcr.io/davidasnider/cava/amcrest-motion
-  newTag: v1.0.24
+  newTag: v1.0.25
 - name: ghcr.io/davidasnider/cava/reader
-  newTag: v1.0.24
+  newTag: v1.0.25
 - name: ghcr.io/davidasnider/cava/webhook
-  newTag: v1.0.24
+  newTag: v1.0.25
