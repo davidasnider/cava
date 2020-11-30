@@ -31,9 +31,7 @@ class Receiver:
             log.warning("You must specify the proper environment variables")
             exit(255)
 
-    def connect(self, callback):
-
-        self.callback = callback
+    def connect(self):
 
         credentials = pika.PlainCredentials(
             self._config["userName"], self._config["password"]
@@ -66,10 +64,11 @@ class Receiver:
             f"connected to exchange {self._config['exchangeName']}, queue {self.queue_name}, routing {self.routingKey}"
         )
 
+    def consume(self, callback):
+
+        self.callback = callback
         self.channel.basic_consume(
             queue=self.queue_name, on_message_callback=self.callback
         )
-
-    def consume(self):
 
         self.channel.start_consuming()

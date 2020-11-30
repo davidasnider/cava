@@ -82,10 +82,10 @@ def main():
     receiver = Receiver(routingKey="incoming.*", queue_name="correlator")
 
     # Connect to rabbitmq and associate the callback function
-    receiver.connect(callback)
+    receiver.connect()
 
     # Start processing messages
-    receiver.consume()
+    receiver.consume(callback)
 
 
 if __name__ == "__main__":

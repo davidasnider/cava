@@ -50,15 +50,15 @@ class weather_forecast(BaseModel):
     current_conditions: observation
     future_conditions: observation
 
-    def snowing(current_conditions, future_conditions, _snowing_weather_codes) -> bool:
+    def snowing(self) -> bool:
         its_snowing = False
 
         if (
-            current_conditions.weather_code in _snowing_weather_codes
-            and current_conditions.precipitation > 0.1
+            self.current_conditions.weather_code in self._snowing_weather_codes
+            and self.current_conditions.precipitation > 0.1
         ) or (
-            future_conditions.weather_code in _snowing_weather_codes
-            and future_conditions.precipitation > 0.1
+            self.future_conditions.weather_code in self._snowing_weather_codes
+            and self.future_conditions.precipitation > 0.1
         ):
             its_snowing = True
 
