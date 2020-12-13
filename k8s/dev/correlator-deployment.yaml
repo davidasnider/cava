@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: correlator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: correlator
+  template:
+    metadata:
+      labels:
+        app: correlator
+    spec:
+      initContainers:
+      - name: init-correlator-server
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
+      containers:
+      - name: correlator
+        image: ghcr.io/davidasnider/cava/correlator:latest
+        env:
+        - name: RABBITMQ_DEFAULT_USER
+          value: "cava"
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cava-passwords
+              key: CAVA_PASS
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: IfNotPresent
+        readinessProbe:
+          exec:
+            command:
+            - "true"
+          initialDelaySeconds: 5
+          periodSeconds: 5
