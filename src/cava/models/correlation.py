@@ -93,7 +93,16 @@ class tracked_events:
         # Run trigger rules against current item
         for rule in self.rules:
             if rule.type == rule_types.trigger:
-                if rule.test.matches(self.events[-1]):
+                matches = False
+                # Without the try, the rule will get an attribute error when the
+                # rule attribute does not exits
+                try:
+                    matches = rule.test.matches(self.events[-1])
+                except Exception:
+                    log.debug(
+                        f"did not match {self.events[-1]._routingKey} to {rule.action}"
+                    )
+                if matches:
                     self.events[-1].matched = True
                     log.info(f"matched {self.events[-1]._routingKey} to {rule.action}")
                     log.debug(f"rule criteria: {rule.test.text}")
