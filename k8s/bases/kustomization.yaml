@@ -10,4 +10,5 @@ resources:
 - webhook-deployment.yaml
 - webhook-service.yaml
 - correlator-deployment.yaml
+- runner-deployment.yaml
 - secrets.yaml

@@ -1,6 +1,7 @@
 import cava
 from cava.messages.receiver import Receiver
 import time
+import cava.runner.my_actions as my_actions
 
 log = cava.log()
 
@@ -11,6 +12,7 @@ def callback(ch, method, properties, body):
     log.info(f"executing action {body.decode()}")
     # ack the message
     ch.basic_ack(delivery_tag=method.delivery_tag)
+    my_actions.rules_to_actions.run_actions(body.decode())
 
 
 def main():
