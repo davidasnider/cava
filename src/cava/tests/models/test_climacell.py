@@ -28,7 +28,7 @@ def test_is_snowing_current_conditions(weather_json):
     weather_json["current_conditions"]["precipitation"] = 0.2
 
     snowing_forecast = weather_forecast(**weather_json)
-    assert snowing_forecast.snowing() is True
+    assert snowing_forecast.snowing is True
 
 
 def test_is_snowing_future_conditions(weather_json):
@@ -36,10 +36,15 @@ def test_is_snowing_future_conditions(weather_json):
     weather_json["future_conditions"]["precipitation"] = 0.2
 
     snowing_forecast = weather_forecast(**weather_json)
-    assert snowing_forecast.snowing() is True
+    assert snowing_forecast.snowing is True
 
 
 def test_is_not_snowing(weather_json):
 
     snowing_forecast = weather_forecast(**weather_json)
-    assert snowing_forecast.snowing() is False
+    assert snowing_forecast.snowing is False
+
+
+def test_climacell_ttl_return_int(weather_json):
+    my_weather_forecast = weather_forecast(**weather_json)
+    assert int(my_weather_forecast.ttl())

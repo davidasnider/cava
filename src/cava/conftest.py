@@ -39,6 +39,7 @@ def weather_json():
     return valid_json
 
 
+# Setup a session level monkeypatch object
 @pytest.fixture(scope="session")
 def monkeypatch_session():
     from _pytest.monkeypatch import MonkeyPatch
@@ -62,7 +63,7 @@ def set_environ(monkeypatch_session):
     monkeypatch_session.setenv("TZ", "America/Denver")
 
 
-@pytest.fixture(autouse=True, scope="session")
+@pytest.fixture(scope="session")
 def setup_module(set_environ):
     command = "docker run -d --name rabbitmq-management --rm -p 5672:5672 -p 8080:15672 -e RABBITMQ_DEFAULT_USER -e RABBITMQ_DEFAULT_PASS rabbitmq:3.8.9-management"
     os.system(command)  # nosec (it's for a test)

@@ -14,3 +14,8 @@ def test_amcrest_ionvalid_json(amcrest_json):
 
     with pytest.raises(pydantic.error_wrappers.ValidationError):
         event(**amcrest_json)
+
+
+def test_amcrest_ttl_return_int(amcrest_json):
+    my_event = event(**amcrest_json)
+    assert int(my_event.ttl())

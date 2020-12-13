@@ -7,7 +7,7 @@ def test_publish_init(set_environ):
     assert my_publisher._config["userName"] == "test-user"
 
 
-def test_publish_init_missing_env(monkeypatch):
+def test_publish_init_missing_env(setup_module, monkeypatch):
     monkeypatch.delenv("RABBITMQ_DEFAULT_USER")
 
     with pytest.raises(SystemExit):
