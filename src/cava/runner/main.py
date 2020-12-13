@@ -1,34 +1,21 @@
-from cava.messages.receiver import Receiver
-from cava.models.correlation import (
-    event_details,
-    tracked_events,
-)
-from cava.correlator.rules import rules
-import time
 import cava
+from cava.messages.receiver import Receiver
+import time
 
 log = cava.log()
-
-
-# Initialize our tracked events, this is essentially our work list
-our_tracked_events = tracked_events(rules)
 
 
 def callback(ch, method, properties, body):
 
     log.debug(f"Received {body} on routing_key {method.routing_key}")
+    log.info(f"executing action {body.decode()}")
+    # ack the message
     ch.basic_ack(delivery_tag=method.delivery_tag)
-
-    # instantiate the appropriate class
-    this_event_details = event_details(routingKey=method.routing_key, body=body)
-
-    our_tracked_events.add_event(this_event_details)
 
 
 def main():
-
-    # Instantiate our receiver object
-    receiver = Receiver(routingKey="incoming.*", queue_name="correlator")
+    # We need to listen for actions coming from rabbitmq
+    receiver = Receiver("run.*", queue_name="actions")
 
     # Connect to rabbitmq and associate the callback function
     retries = 0
@@ -47,7 +34,6 @@ def main():
         log.info("Unable to connect to rabbitmq, quitting")
         exit()
 
-    # Start processing messages
     receiver.consume(callback)
 
 

@@ -7,3 +7,6 @@ class event(BaseModel):
     action: Optional[str]
     index: Optional[int]
     camera: Optional[str]
+
+    def ttl(self):
+        return 600  # 600 Seconds
