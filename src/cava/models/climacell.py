@@ -50,6 +50,7 @@ class weather_forecast(BaseModel):
     current_conditions: observation
     future_conditions: observation
 
+    @property
     def snowing(self) -> bool:
         its_snowing = False
 
@@ -77,3 +78,6 @@ class weather_forecast(BaseModel):
         "snow_light",
         "flurries",
     ]
+
+    def ttl(self) -> int:
+        return 1800  # 30 minutes, enough for two samplings
