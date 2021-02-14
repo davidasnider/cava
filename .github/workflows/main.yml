@@ -420,8 +420,6 @@ jobs:
   pr-approve:
     runs-on: ubuntu-latest
     needs:
-      - pre-commit
-      - gitleaks
       - deploy
     steps:
       - uses: hmarr/auto-approve-action@v2.0.0
