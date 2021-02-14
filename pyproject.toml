@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "cava"
+version = "0.1.0"
+description = ""
+authors = ["David Snider <david@davidsnider.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PyYAML = "^5.4.1"
+pika = "^1.2.0"
+fastapi = "^0.63.0"
+statsd = "^3.3.0"
+rule-engine = "^2.4.1"
+arrow = "^0.17.0"
+requests = "^2.25.1"
+amcrest = "^1.7.2"
+uvicorn = "^0.13.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.2"
+bandit = "^1.7.0"
+black = "^20.8b1"
+flake8 = "^3.8.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
