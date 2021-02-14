@@ -56,10 +56,10 @@ class weather_forecast(BaseModel):
 
         if (
             self.current_conditions.weather_code in self._snowing_weather_codes
-            and self.current_conditions.precipitation > 0.1
+            and self.current_conditions.precipitation > 0.05
         ) or (
             self.future_conditions.weather_code in self._snowing_weather_codes
-            and self.future_conditions.precipitation > 0.1
+            and self.future_conditions.precipitation > 0.05
         ):
             its_snowing = True
 
