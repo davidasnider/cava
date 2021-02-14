@@ -290,6 +290,7 @@ jobs:
     - build-correlator
     - build-runner
     - pre-commit
+    - gitleaks
 
     steps:
       - name: Set version tags webhook
