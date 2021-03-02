@@ -396,7 +396,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
 
 [[package]]
 name = "rule-engine"
-version = "2.4.1"
+version = "3.0.0"
 description = "A lightweight, optionally typed expression language with a custom grammar for matching arbitrary Python objects."
 category = "main"
 optional = false
@@ -507,7 +507,7 @@ standard = ["websockets (>=8.0.0,<9.0.0)", "watchgod (>=0.6,<0.7)", "python-dote
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7e6c187bedb238b45f0b2284332c7572f515233f0c8e44ca7f72520ec7665291" # pragma: allowlist secret
+content-hash = "338ae9bea60ee19c81dd8ffac5f355eae149aff702b62bb73ec3451f1d44e77e"
 
 [metadata.files]
 amcrest = [
@@ -736,7 +736,7 @@ requests = [
     {file = "requests-2.25.1.tar.gz", hash = "sha256:27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804"},
 ]
 rule-engine = [
-    {file = "rule-engine-2.4.1.tar.gz", hash = "sha256:07c0577d789142fb60ce7098406391fb85cc1ee21034ead713103fb2d6c1d39e"},
+    {file = "rule-engine-3.0.0.tar.gz", hash = "sha256:1d7bf6835b1772b9472a7e334b86618ab3b01e94e6fb927d159ce605171f34a1"},
 ]
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},
