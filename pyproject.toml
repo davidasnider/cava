@@ -17,7 +17,7 @@ amcrest = "^1.7.2"
 uvicorn = "^0.13.3"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.2"
+pytest = "^6.2.3"
 bandit = "^1.7.0"
 black = "^20.8b1"
 flake8 = "^3.8.4"
