@@ -377,7 +377,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Kustomize
-        uses: imranismail/setup-kustomize@v1
+        uses: imranismail/setup-kustomize@v1.5.4
 
       - name: Update kubernetes resources
         run: |
