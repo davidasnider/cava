@@ -396,7 +396,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
 
 [[package]]
 name = "rule-engine"
-version = "2.4.1"
+version = "3.2.0"
 description = "A lightweight, optionally typed expression language with a custom grammar for matching arbitrary Python objects."
 category = "main"
 optional = false
@@ -744,7 +744,7 @@ requests = [
     {file = "requests-2.25.1.tar.gz", hash = "sha256:27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804"},
 ]
 rule-engine = [
-    {file = "rule-engine-2.4.1.tar.gz", hash = "sha256:07c0577d789142fb60ce7098406391fb85cc1ee21034ead713103fb2d6c1d39e"},
+    {file = "rule-engine-3.2.0.tar.gz", hash = "sha256:9ace79cda5585501c07730e3005dc60783e12e21c97f667ef2a2bd76e961f556"},
 ]
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},
