@@ -20,7 +20,7 @@ uvicorn = "^0.13.4"
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
 bandit = "^1.7.0"
-black = "^20.8b1"
+black = "^21.5b1"
 flake8 = "^3.9.2"
 
 [build-system]
