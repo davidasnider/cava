@@ -54,7 +54,7 @@ Takes any json object and drops it into the Message Exchange queue with `type: w
 
 - Should only accept json data, return 400 for bad (non json) data
 - Should only emit a copy of the json data to the queue
-- Should use /api/v1/:route\_key: where :route\_key: will be the routing key
+- Should use /api/v1/:route_key: where :route_key: will be the routing key
 - No authentication
 
 #### Icinga Emitter
