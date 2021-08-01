@@ -14,7 +14,7 @@ arrow = "^1.1.1"
 rule-engine = "^3.3.0"
 
 requests = "^2.26.0"
-amcrest = "^1.7.2"
+amcrest = "^1.8.0"
 uvicorn = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
