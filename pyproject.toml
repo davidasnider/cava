@@ -11,7 +11,7 @@ pika = "^1.2.0"
 fastapi = "^0.68.0"
 statsd = "^3.3.0"
 arrow = "^1.1.1"
-rule-engine = "^3.3.0"
+rule-engine = "^3.3.1"
 
 requests = "^2.26.0"
 amcrest = "^1.8.0"

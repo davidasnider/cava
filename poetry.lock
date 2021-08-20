@@ -417,7 +417,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
 name = "rule-engine"
-version = "3.3.0"
+version = "3.3.1"
 description = "A lightweight, optionally typed expression language with a custom grammar for matching arbitrary Python objects."
 category = "main"
 optional = false
@@ -521,7 +521,7 @@ standard = ["websockets (>=9.1)", "httptools (>=0.2.0,<0.3.0)", "watchgod (>=0.6
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "4555c70f8f8e6ea5432e06258603a742edc2fcbfb04bcf61fbe4f4d153b27067"
+content-hash = "7fda1adf07940d3ae66bcbfee9d81f88c57d5fee8e8d5e61a771b1a9e46c3277"
 
 [metadata.files]
 amcrest = [
@@ -763,7 +763,7 @@ requests = [
     {file = "requests-2.26.0.tar.gz", hash = "sha256:b8aa58f8cf793ffd8782d3d8cb19e66ef36f7aba4353eec859e74678b01b07a7"},
 ]
 rule-engine = [
-    {file = "rule-engine-3.3.0.tar.gz", hash = "sha256:de7156952eb9ca81deb5db23b78aba40b18aff2d5049c43cd98fd0b9f90d3863"},
+    {file = "rule-engine-3.3.1.tar.gz", hash = "sha256:b62282513113534cf6a46b3bf50f7dbac37f5179c6f1c497b4096f7561d04590"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
