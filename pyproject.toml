@@ -15,7 +15,7 @@ rule-engine = "^3.3.0"
 
 requests = "^2.26.0"
 amcrest = "^1.8.0"
-uvicorn = "^0.14.0"
+uvicorn = "^0.17.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
