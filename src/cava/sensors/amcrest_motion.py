@@ -23,7 +23,7 @@ logging.info("Starting Amcrest Sensor")
 camera = AmcrestCamera(mycamera, 80, user, password).camera
 logging.info(f"Attempting to connect to camera {mycamera}")
 device = camera.machine_name.rstrip()
-device = device.split("=")[1]
+# device = device.split("=")[1]
 logging.info(f"Connected to {device} on {mycamera}")
 
 
