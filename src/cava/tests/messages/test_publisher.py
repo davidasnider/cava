@@ -4,7 +4,7 @@ import pytest
 
 def test_publish_init(set_environ):
     my_publisher = Publisher()
-    assert my_publisher._config["userName"] == "test-user"
+    assert my_publisher._config["userName"] == "guest"
 
 
 def test_publish_init_missing_env(setup_module, monkeypatch):
