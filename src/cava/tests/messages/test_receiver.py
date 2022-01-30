@@ -6,7 +6,7 @@ import pytest
 
 def test_receiver_init(set_environ):
     my_receiver = Receiver()
-    assert my_receiver._config["userName"] == "test-user"
+    assert my_receiver._config["userName"] == "guest"
 
 
 def test_receiver_init_missing_env(monkeypatch):

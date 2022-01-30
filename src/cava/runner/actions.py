@@ -1,8 +1,10 @@
 import requests
 from pydantic import BaseModel, HttpUrl
 from typing import Union, List, Optional
+from requests.auth import HTTPDigestAuth
 import statsd
 import cava
+import os
 
 log = cava.log()
 
@@ -12,6 +14,8 @@ class indigo_executor(BaseModel):
     uri: str
     success: bool = False
     host: HttpUrl = "http://blanc:8000"
+    user: str = os.environ.get("INDIGO_USER")
+    password: str = os.environ.get("INDIGO_PASS")
 
     @property
     def url(self):
@@ -19,7 +23,10 @@ class indigo_executor(BaseModel):
 
     # Run the activity specified
     def execute_action(self):
-        r = requests.request("EXECUTE", self.url)
+        print("User: ", self.user)
+        r = requests.request(
+            "EXECUTE", self.url, auth=HTTPDigestAuth(self.user, self.password)
+        )
         if r.ok:
             self.success = True
         log.info(f"executing indigo action {self.url}")
