@@ -333,7 +333,7 @@ jobs:
 
     steps:
       - name: Set version tags primary container
-        id: build-prep-webhook
+        id: build-prep-primary-container
         run: |
           DOCKER_IMAGE=ghcr.io/davidasnider/cava
           VERSION=noop
