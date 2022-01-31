@@ -1,5 +1,5 @@
 # Build Image
-FROM python:3.8 AS compile-image
+FROM python:3.9 AS compile-image
 
 RUN useradd -m -u 1000 sensor
 USER sensor

@@ -15,6 +15,16 @@ ansible-playbook site.yaml --tags cava -l r307
 
 ## Hacking
 
+## Building pre-requisites
+
+We use poetry for dependency management.  When pushing a release, we need to
+create the requirements.txt file.  This is done by running:
+
+```bash
+cd ~/code/cava/src/cava
+poetry export -f requirements.txt > requirements.txt
+```
+
 ### Webhook
 
 To hack on the primary webhook, simply use `make run-rabbitmq` followed by
