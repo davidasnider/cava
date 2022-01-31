@@ -8,6 +8,13 @@ from pydantic import BaseModel, Field
 
 log = cava.log()
 
+# We need these... if they don't exist, quit
+required_variables = ["TOMORROW_IO_API_KEY", "CAVA_URL"]
+for required_variable in required_variables:
+    if required_variable not in os.environ:
+        log.error(f"Missing required environment variable {required_variable}")
+        exit(1)
+
 
 class individual_observation(BaseModel):
     temperature: float
