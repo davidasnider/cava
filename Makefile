@@ -13,7 +13,7 @@ setup-dev:
 
 # Run the rabbit backend so that we can do better debugging of the webhook
 run-rabbit:
-	docker run -d --name rabbitmq-management --rm -p 5672:5672 -p 8080:15672 --env-file .env rabbitmq:3.8.9-management
+	lima nerdctl run -d --name rabbitmq-management -p 5672:5672 -p 8080:15672 rabbitmq:3.8.9-management
 
 run-webhook: run-rabbit
 	(source .venv/bin/activate && \
@@ -33,7 +33,7 @@ killall: stop-rabbit
 	killall python3
 
 stop-rabbit:
-	docker stop rabbitmq-management
+	lima nerdctl rm -f rabbitmq-management
 
 help:
 	@echo "Usage: make {run-rabbit|run-webhook|stop-rabbit|run-correlator|help}" 1>&2 && false

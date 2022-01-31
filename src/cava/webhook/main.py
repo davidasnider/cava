@@ -3,7 +3,9 @@ import uvicorn
 from cava.messages.publisher import Publisher
 
 from cava.models.amcrest import event as amcrest_motion
-from cava.models.climacell import weather_forecast as weather
+from cava.models.tomorrow_io import weather_observation
+
+# from cava.models.climacell import weather_forecast as weather
 import cava
 
 log = cava.log()
@@ -31,7 +33,7 @@ async def motion(motion: amcrest_motion):
 
 
 @app.put("/api/v01/weather")
-async def weather(weather: weather):
+async def weather(weather: weather_observation):
     """
     See model definition for fields
     """
