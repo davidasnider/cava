@@ -3,7 +3,7 @@ disable_existing_loggers: True
 handlers:
   default:
     class: logging.StreamHandler
-    formatter: precise
+    formatter: short
     level: INFO
     stream: ext://sys.stdout
   short:
