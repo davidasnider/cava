@@ -17,15 +17,17 @@ patches:
 - path: loadbalancer-patch.yaml
 - path: loadbalancer-patch-rabbitmq.yaml
 images:
+- name: ghcr.io/davidasnider/cava
+  newTag: v1.0.107
 - name: ghcr.io/davidasnider/cava/amcrest-motion
-  newTag: v1.0.103
+  newTag: v1.0.107
 - name: ghcr.io/davidasnider/cava/climacell
-  newTag: v1.0.103
+  newTag: v1.0.107
 - name: ghcr.io/davidasnider/cava/correlator
-  newTag: v1.0.103
+  newTag: v1.0.107
 - name: ghcr.io/davidasnider/cava/reader
-  newTag: v1.0.103
+  newTag: v1.0.107
 - name: ghcr.io/davidasnider/cava/runner
-  newTag: v1.0.103
+  newTag: v1.0.107
 - name: ghcr.io/davidasnider/cava/webhook
-  newTag: v1.0.103
+  newTag: v1.0.107
