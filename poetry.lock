@@ -1,6 +1,6 @@
 [[package]]
 name = "amcrest"
-version = "1.9.3"
+version = "1.9.4"
 description = "Python wrapper implementation for Amcrest cameras."
 category = "main"
 optional = false
@@ -592,12 +592,12 @@ standard = ["websockets (>=10.0)", "httptools (>=0.2.0,<0.4.0)", "watchgod (>=0.
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "ce2d8097194e69f3fe243efe72f94029756ffe3c3de7efbb1c42e161e70847bd"
+content-hash = "8b34cd79cd2a796e9c29d516167f80a22fa700057b8d177c275d1a12ad1d2c64"
 
 [metadata.files]
 amcrest = [
-    {file = "amcrest-1.9.3-py3-none-any.whl", hash = "sha256:23621f3772ca868e6b4a8aa887574ac880e04f45c0f249b71ff0df38ab482b0c"},
-    {file = "amcrest-1.9.3.tar.gz", hash = "sha256:4aa8b35ef2f204bf2cb3761785d0728cbb32c79b14353fcc8525b094dbe67816"},
+    {file = "amcrest-1.9.4-py3-none-any.whl", hash = "sha256:734a4c4e29f0689ec168dd00c419ed34da4daacaccf3f2794abcc577442d0ac0"},
+    {file = "amcrest-1.9.4.tar.gz", hash = "sha256:ca4e1e0c1926b8dd7d23df52bcdc4b290c61a0917578eb4995451b6d7ea20601"},
 ]
 argcomplete = [
     {file = "argcomplete-2.0.0-py2.py3-none-any.whl", hash = "sha256:cffa11ea77999bb0dd27bb25ff6dc142a6796142f68d45b1a26b11f58724561e"},
