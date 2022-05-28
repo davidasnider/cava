@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.2.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -11,26 +11,35 @@ repos:
       - id: pretty-format-json
       - id: detect-private-key
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.1.0
+    rev: v1.2.0
     hooks:
       - id: detect-secrets
         args: [--baseline, .secrets.baseline]
         exclude: .*/tests/.*
   - repo: https://github.com/ambv/black
-    rev: 22.1.0
+    rev: 22.3.0
     hooks:
       - id: black
-        language_version: python3.8
   - repo: https://gitlab.com/pycqa/flake8
     rev: "3.9.2"
     hooks:
       - id: flake8
 
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.13 # Use the ref you want to point at
+    rev: 0.7.14 # Use the ref you want to point at
     hooks:
       - id: mdformat
         # optional
         additional_dependencies:
           - mdformat-tables
           - mdformat-black
+
+  - repo: local
+    hooks:
+    - id: update-requirements-txt
+      name: update-requirements-txt
+      description: 'Generate requirements.txt based on poetry.lock'
+      entry: poetry
+      args: [export, --format, requirements.txt, --output, requirements.txt]
+      language: system
+      pass_filenames: false
