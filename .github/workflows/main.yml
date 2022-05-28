@@ -13,13 +13,6 @@ jobs:
       - name: Branch name
         run: echo running on branch ${{ github.event.pull_request.head.ref }}
 
-  # pre-commit:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-python@v2
-  #     - uses: pre-commit/action@v2.0.3
-
   gitleaks:
     runs-on: ubuntu-latest
     steps:
@@ -328,7 +321,6 @@ jobs:
     - build-climacell
     - build-correlator
     - build-runner
-    - pre-commit
     - gitleaks
 
     steps:
