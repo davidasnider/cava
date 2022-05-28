@@ -13,13 +13,6 @@ jobs:
       - name: Branch name
         run: echo running on branch ${{ github.event.pull_request.head.ref }}
 
-  pre-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - uses: pre-commit/action@v2.0.3
-
   gitleaks:
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +56,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push webhook
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./src/cava
           file: ./src/cava/Dockerfile
@@ -104,7 +97,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push webhook
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./src/cava
           file: ./src/cava/webhook/Dockerfile
@@ -145,7 +138,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push reader
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./src/cava/
           file: ./src/cava/reader/Dockerfile
@@ -186,7 +179,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push climacell
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./src/cava/
           file: ./src/cava/sensors/weather/Dockerfile
@@ -227,7 +220,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push amcrest-motion
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./src/cava/
           file: ./src/cava/sensors/Dockerfile
@@ -268,7 +261,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push amcrest-motion
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./src/cava/
           file: ./src/cava/correlator/Dockerfile
@@ -309,7 +302,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push amcrest-motion
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./src/cava/
           file: ./src/cava/runner/Dockerfile
@@ -328,7 +321,6 @@ jobs:
     - build-climacell
     - build-correlator
     - build-runner
-    - pre-commit
     - gitleaks
 
     steps:
