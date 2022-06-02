@@ -8,7 +8,7 @@ resources:
 - namespace.yaml
 - sensors-amcrest.yaml
 - ../bases
-- sensors-climacell.yaml
+- sensors-tomorrow-io.yaml
 
 namespace: cava
 
@@ -20,8 +20,6 @@ images:
 - name: ghcr.io/davidasnider/cava
   newTag: v1.0.108
 - name: ghcr.io/davidasnider/cava/amcrest-motion
-  newTag: v1.0.108
-- name: ghcr.io/davidasnider/cava/climacell
   newTag: v1.0.108
 - name: ghcr.io/davidasnider/cava/correlator
   newTag: v1.0.108

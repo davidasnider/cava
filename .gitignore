@@ -5,3 +5,4 @@ __pycache__
 passwords.sh
 k8s/bases/secrets.yaml
 .env
+.env-prod
