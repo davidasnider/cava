@@ -5,7 +5,6 @@ from cava.messages.publisher import Publisher
 from cava.models.amcrest import event as amcrest_motion
 from cava.models.tomorrow_io import weather_observation
 
-# from cava.models.climacell import weather_forecast as weather
 import cava
 
 log = cava.log()

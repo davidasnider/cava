@@ -1,21 +1,21 @@
-from climacell_api.client import ClimacellApiClient
+from cell_api.client import cellApiClient
 import arrow
 import time
 import os
-from cava.models.climacell import weather_forecast as weather
-from cava.models.climacell import observation as observation
+from cava.models.cell import weather_forecast as weather
+from cava.models.cell import observation as observation
 import requests
 import cava
 
 log = cava.log()
 url = os.getenv("CAVA_URL")
 uri = "/api/v01/weather"
-key = os.getenv("CLIMACELL_API_KEY")
+key = os.getenv("CELL_API_KEY")
 if key is None:
-    print("You must specify an api key in the environment variable CLIMACEL_API_KEY")
+    print("You must specify an api key in the environment variable CEL_API_KEY")
     exit(255)
 
-client = ClimacellApiClient(key)
+client = cellApiClient(key)
 lat = "40.571710"
 lon = "-111.791090"
 
@@ -62,7 +62,7 @@ my_fields = [
 ]
 
 while True:
-    log.debug("Getting forecast data from climacell")
+    log.debug("Getting forecast data from cell")
     n = client.nowcast(units="us", lat=lat, lon=lon, timestep=60, fields=my_fields)
 
     if n.status_code in [200]:
@@ -91,6 +91,6 @@ while True:
         else:
             log.info(f"Failed to post to cava, error code: {result.status_code}")
     else:
-        log.info(f"Failed to get data from climacell, error code: {n.status_code}")
+        log.info(f"Failed to get data from cell, error code: {n.status_code}")
 
     time.sleep(900)

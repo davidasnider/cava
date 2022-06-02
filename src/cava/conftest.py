@@ -67,7 +67,7 @@ def set_environ(monkeypatch_session):
     monkeypatch_session.setenv("CAVA_CAMERA", "some-test-camera")
     monkeypatch_session.setenv("CAVA_USER", "test-user")
     monkeypatch_session.setenv("CAVA_PASSWORD", "test-passwerd")
-    monkeypatch_session.setenv("CLIMACELL_API_KEY", "test-api-key")
+    monkeypatch_session.setenv("TOMORROW_IO_API_KEY", "test-api-key")
     monkeypatch_session.setenv("TZ", "America/Denver")
     monkeypatch_session.setenv(
         "INDIGO_USER", os.getenv("INDIGO_USER")
