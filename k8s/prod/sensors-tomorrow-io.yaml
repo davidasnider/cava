@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sensor-climacell
+  name: sensor-tomorrow-io
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sensor-climacell
+      app: sensor-tomorrow-io
   template:
     metadata:
       labels:
-        app: sensor-climacell
+        app: sensor-tomorrow-io
     spec:
       containers:
-      - name: sensor-climacell
-        image: ghcr.io/davidasnider/cava/climacell:latest
+      - name: sensor-tomorrow-io
+        image: ghcr.io/davidasnider/cava:latest
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"
         - name: CAVA_USER
           value: "admin"
-        - name: CLIMACELL_API_KEY
+        - name: tomorrow-io_API_KEY
           valueFrom:
             secretKeyRef:
               name: cava-passwords
-              key: CLIMACELL_API_KEY
+              key: tomorrow_io_API_KEY
         resources:
           limits:
             memory: "64Mi"
