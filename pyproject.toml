@@ -6,7 +6,7 @@ authors = ["David Snider <david@davidsnider.org>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-PyYAML = "^5.4.1"
+PyYAML = "^6.0"
 pika = "^1.2.0"
 fastapi = "^0.68.0"
 statsd = "^3.3.0"
@@ -15,14 +15,14 @@ rule-engine = "^3.3.0"
 
 requests = "^2.26.0"
 amcrest = "^1.8.0"
-uvicorn = "^0.14.0"
 httpx = "0.23.0"
+uvicorn = "^0.17.4"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.4"
+pytest = "^7.0.0"
 bandit = "^1.7.0"
-black = "^21.6b0"
-flake8 = "^3.9.2"
+black = "^22.1"
+flake8 = "^4.0.1"
 python-dotenv = "^0.19.2"
 
 [build-system]
