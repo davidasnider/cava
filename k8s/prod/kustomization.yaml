@@ -8,7 +8,7 @@ resources:
 - namespace.yaml
 - sensors-amcrest.yaml
 - ../bases
-- sensors-climacell.yaml
+- sensors-tomorrow-io.yaml
 
 namespace: cava
 
@@ -18,16 +18,16 @@ patches:
 - path: loadbalancer-patch-rabbitmq.yaml
 images:
 - name: ghcr.io/davidasnider/cava
-  newTag: v1.0.140
+  newTag: v1.0.153
 - name: ghcr.io/davidasnider/cava/amcrest-motion
-  newTag: v1.0.140
+  newTag: v1.0.153
 - name: ghcr.io/davidasnider/cava/climacell
   newTag: v1.0.140
 - name: ghcr.io/davidasnider/cava/correlator
-  newTag: v1.0.140
+  newTag: v1.0.153
 - name: ghcr.io/davidasnider/cava/reader
-  newTag: v1.0.140
+  newTag: v1.0.153
 - name: ghcr.io/davidasnider/cava/runner
-  newTag: v1.0.140
+  newTag: v1.0.153
 - name: ghcr.io/davidasnider/cava/webhook
-  newTag: v1.0.140
+  newTag: v1.0.153

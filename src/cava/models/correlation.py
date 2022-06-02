@@ -1,5 +1,6 @@
 from cava.models.amcrest import event as motion_event
-from cava.models.climacell import weather_forecast
+
+# from cava.models.tomorrow_io import weather_observation
 import json
 import arrow
 from enum import Enum
@@ -43,7 +44,7 @@ resolver_context = rule_engine.Context(resolver=rule_engine.resolve_attribute)
 
 event_to_class_map = {
     "incoming.motion": motion_event,
-    "incoming.weather": weather_forecast,
+    # "incoming.weather": weather_forecast,
 }
 
 
