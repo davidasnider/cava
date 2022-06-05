@@ -13,16 +13,6 @@ jobs:
       - name: Branch name
         run: echo running on branch ${{ github.event.pull_request.head.ref }}
 
-  gitleaks:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: "0"
-      # Gitleaks check for secrets
-      - name: Gitleaks
-        uses: zricethezav/gitleaks-action@v1.6.0
-
   build-primary-container:
     runs-on: ubuntu-latest
     steps:
@@ -279,7 +269,6 @@ jobs:
     - build-amcrest-motion
     - build-correlator
     - build-runner
-    - gitleaks
 
     steps:
       - name: Set version tags primary container
