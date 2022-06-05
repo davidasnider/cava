@@ -614,7 +614,7 @@ standard = ["websockets (>=10.0)", "httptools (>=0.4.0)", "watchgod (>=0.6)", "p
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "cfadd2b954f134cd6de1f736aade797deb2a2e6bde960090ceb3e307cf1f03d4"
+content-hash = "d448e570fef77c554b2c5538f8b408e0ced62910b4b3db13b517778c90f15520"
 
 [metadata.files]
 amcrest = [
