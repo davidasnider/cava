@@ -22,7 +22,7 @@ images:
 - name: ghcr.io/davidasnider/cava/amcrest-motion
   newTag: v1.0.153
 - name: ghcr.io/davidasnider/cava/climacell
-  newTag: v1.0.140
+  newTag: v1.0.151
 - name: ghcr.io/davidasnider/cava/correlator
   newTag: v1.0.153
 - name: ghcr.io/davidasnider/cava/reader
