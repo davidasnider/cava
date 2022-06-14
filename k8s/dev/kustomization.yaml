@@ -22,5 +22,5 @@ images:
   newTag: v1.0.161
 - name: ghcr.io/davidasnider/cava/runner
   newTag: v1.0.161
-- name: ghcr.io/davidasnider/cava/webhook
+- name: ghcr.io/davidasnider/cava
   newTag: v1.0.161
