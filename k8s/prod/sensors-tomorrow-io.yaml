@@ -20,11 +20,11 @@ spec:
           value: "http://cava.thesniderpad.com:8000"
         - name: CAVA_USER
           value: "admin"
-        - name: tomorrow-io_API_KEY
+        - name: TOMORROW_IO_API_KEY
           valueFrom:
             secretKeyRef:
               name: cava-passwords
-              key: tomorrow_io_API_KEY
+              key: TOMORROW_IO_API_KEY
         resources:
           limits:
             memory: "64Mi"
