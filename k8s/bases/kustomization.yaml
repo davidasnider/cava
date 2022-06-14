@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 images:
-- name: ghcr.io/davidasnider/cava/webhook
+- name: ghcr.io/davidasnider/cava/cava
   newTag: v1.0.161
 resources:
 - rabbitmq-deployment.yaml
