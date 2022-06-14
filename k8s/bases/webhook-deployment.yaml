@@ -48,4 +48,3 @@ spec:
             - "true"
           initialDelaySeconds: 5
           periodSeconds: 5
-        command:
