@@ -18,7 +18,15 @@ spec:
         command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
       containers:
       - name: webhook
-        image: ghcr.io/davidasnider/cava/webhook:latest
+        image: ghcr.io/davidasnider/cava:latest
+        command: [
+          "uvicorn",
+          "--host",
+          "0.0.0.0",
+          "cava.webhook.main:app",
+          "--log-config",
+          "/app/cava/logger_config.yaml"
+        ]
         env:
         - name: RABBITMQ_DEFAULT_USER
           value: "cava"
@@ -40,3 +48,4 @@ spec:
             - "true"
           initialDelaySeconds: 5
           periodSeconds: 5
+        command:
