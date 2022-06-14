@@ -133,9 +133,9 @@ six==1.16.0; python_version >= "3.6" and python_full_version < "3.0.0" or python
 sniffio==1.2.0; python_full_version >= "3.6.2" and python_version >= "3.7" \
     --hash=sha256:471b71698eac1c2112a40ce2752bb2f4a4814c22a54a3eed3676bc0f5ca9f663 \
     --hash=sha256:c4666eecec1d3f50960c6bdf61ab7bc350648da6c126e3cf6898d8cd4ddcd3de
-starlette==0.14.2; python_version >= "3.6" and python_full_version >= "3.6.1" \
-    --hash=sha256:3c8e48e52736b3161e34c9f0e8153b4f32ec5d8995a3ee1d59410d92f75162ed \
-    --hash=sha256:7d49f4a27f8742262ef1470608c59ddbc66baf37c148e938c7038e6bc7a998aa
+starlette==0.20.3; python_version >= "3.6" and python_full_version >= "3.6.1" \
+    --hash=sha256:38ef09c1c9a8ea7b7927d2c42d515efbbdbb6ea60dbe88b29abb320824fe16c1 \
+    --hash=sha256:4d39be143dffde65782865ce40f86e5a8986400c5be0217b3cda3e732bfd7233
 statsd==3.3.0 \
     --hash=sha256:c610fb80347fca0ef62666d241bce64184bd7cc1efe582f9690e045c25535eaa \
     --hash=sha256:e3e6db4c246f7c59003e51c9720a51a7f39a396541cb9b147ff4b14d15b5dd1f
