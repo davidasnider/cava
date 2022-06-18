@@ -40,6 +40,8 @@ spec:
             secretKeyRef:
               key: TOMORROW_IO_API_KEY
               name: cava-passwords
+        - name: CAVA_URL
+          value: "http://cava.thesniderpad.com:8000"
         resources:
           limits:
             memory: "128Mi"
