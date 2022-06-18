@@ -6,10 +6,9 @@ SHELL        = /bin/bash
 setup-dev:
 	rm -rf .venv && \
 	python3 -m venv .venv && \
-	source .venv/bin/activate && \
-	python3 -m pip install --upgrade pip && \
-	pip install poetry && \
-	poetry install
+	.venv/bin/python3 -m pip install --upgrade pip && \
+	.venv/bin/pip3 install poetry && \
+	.venv/bin/poetry install
 
 # Run the rabbit backend so that we can do better debugging of the webhook
 run-rabbit:
