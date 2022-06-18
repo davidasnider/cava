@@ -35,6 +35,11 @@ spec:
             secretKeyRef:
               name: cava-passwords
               key: CAVA_PASS
+        - name: TOMORROW_IO_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: TOMORROW_IO_API_KEY
+              name: cava-passwords
         resources:
           limits:
             memory: "128Mi"
