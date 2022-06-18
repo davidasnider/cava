@@ -10,7 +10,7 @@ will take care of all secrets generation, etc.  Simply run:
 
 ```bash
 cd ~/code/ansible
-ansible-playbook site.yaml --tags cava -l r307
+ansible-playbook site.yaml --tags cava
 ```
 
 ## Hacking
@@ -18,12 +18,8 @@ ansible-playbook site.yaml --tags cava -l r307
 ## Building pre-requisites
 
 We use poetry for dependency management.  When pushing a release, we need to
-create the requirements.txt file.  This is done by running:
-
-```bash
-cd ~/code/cava/src/cava
-poetry export -f requirements.txt > requirements.txt
-```
+create the requirements.txt file.  This is done automatically by the pre-commit
+system.
 
 ### Webhook
 
