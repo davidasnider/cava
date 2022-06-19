@@ -1,9 +1,11 @@
 import pika
 import traceback
 import cava
-import os
+from cava.models.settings import Settings
 
 log = cava.log()
+
+settings = Settings()
 
 
 class Publisher:
@@ -13,9 +15,9 @@ class Publisher:
 
         self._config = {
             "exchangeName": "message_exchange",
-            "userName": os.getenv("RABBITMQ_DEFAULT_USER"),
-            "password": os.getenv("RABBITMQ_DEFAULT_PASS"),
-            "host": os.getenv("RABBITMQ_SERVICE_SERVICE_HOST"),
+            "userName": settings.RABBITMQ_DEFAULT_USER,
+            "password": settings.RABBITMQ_DEFAULT_PASS.get_secret_value(),
+            "host": settings.RABBITMQ_SERVICE_SERVICE_HOST,
             "port": "5672",
             "virtualHost": "/",
         }

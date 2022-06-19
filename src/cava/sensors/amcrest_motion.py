@@ -1,10 +1,11 @@
 from amcrest import AmcrestCamera
 import requests
-import os
 import logging
 
 from cava.models.amcrest import event as amcrest_event
+from cava.models.settings import Settings
 
+settings = Settings()
 
 # Setup logging
 logging.basicConfig(
@@ -13,11 +14,11 @@ logging.basicConfig(
     datefmt="%m/%d/%Y %I:%M:%S %p",
 )
 
-url = os.getenv("CAVA_URL")
-uri = os.getenv("CAVA_URI")
-mycamera = os.getenv("CAVA_CAMERA")
-user = os.getenv("CAVA_USER")
-password = os.getenv("CAVA_PASSWORD")
+url = settings.CAVA_URL
+uri = settings.CAVA_URI
+mycamera = settings.CAVA_CAMERA
+user = settings.CAVA_USER
+password = settings.CAVA_PASSWORD.get_secret_value()
 
 logging.info("Starting Amcrest Sensor")
 camera = AmcrestCamera(mycamera, 80, user, password).camera

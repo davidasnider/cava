@@ -85,6 +85,8 @@ Use the current Influxdb, Grafana, etc.
 
 Todo:
 
+- \[ \] Fix K8s deployments to use env files to generate secrets. Patch them all
+  as well so that they all get the same environment variables.
 - \[ \] Create a "Reader" to use during testing, add to Dev Kustomize
 - \[x\] Add logging to webhook
 - \[x\] Move secrets to k8s secrets and environment variables

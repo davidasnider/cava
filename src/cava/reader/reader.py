@@ -3,7 +3,9 @@ Reads all of the logs on the message exchange, useful for testing inputs
 """
 
 import pika
-import os
+from cava.models.settings import Settings
+
+settings = Settings()
 
 
 def callback(channel, method, properties, body):  # dead: disable
@@ -22,7 +24,7 @@ def main():
     Main program for reading logs
     """
 
-    password = os.getenv("CAVA_PASSWORD")
+    password = settings.CAVA_PASSWORD.get_secret_value()
     credentials = pika.PlainCredentials("cava", password)
 
     connection = pika.BlockingConnection(
