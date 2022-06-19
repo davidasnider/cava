@@ -1,22 +1,13 @@
 from cava.messages.receiver import Receiver
 from cava.messages.publisher import Publisher
 
-import pytest
 
-
-def test_receiver_init(set_environ):
+def test_receiver_init():
     my_receiver = Receiver()
     assert my_receiver._config["userName"] == "guest"
 
 
-def test_receiver_init_missing_env(monkeypatch):
-    monkeypatch.delenv("RABBITMQ_DEFAULT_USER")
-
-    with pytest.raises(SystemExit):
-        Receiver()
-
-
-def test_receive_message(set_environ):
+def test_receive_message():
     test_message = "test message"
     my_receiver = Receiver(routingKey="pytest")
     my_receiver.connect()

@@ -4,18 +4,20 @@ from typing import Union, List, Optional
 from requests.auth import HTTPDigestAuth
 import statsd
 import cava
-import os
+from cava.models.settings import Settings
+
 
 log = cava.log()
+settings = Settings()
 
 
 # This will let us execute an action against indigo
 class indigo_executor(BaseModel):
     uri: str
     success: bool = False
-    host: HttpUrl = "http://blanc:8000"
-    user: str = os.environ.get("INDIGO_USER")
-    password: str = os.environ.get("INDIGO_PASS")
+    host: HttpUrl = settings.INDIGO_URL
+    user: str = settings.INDIGO_USER
+    password: str = settings.INDIGO_PASS.get_secret_value()
 
     @property
     def url(self):

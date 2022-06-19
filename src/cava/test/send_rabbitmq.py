@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 import sys
 import pika
-import os
+from cava.models.settings import Settings
 
+settings = Settings()
 message = " ".join(sys.argv[1:]) or "Hello World!"
 
-password = os.getenv("CAVA_PASSWORD")
+password = settings.CAVA_PASSWORD.get_secret_value()
 credentials = pika.PlainCredentials("cava", password)
 connection = pika.BlockingConnection(
     pika.ConnectionParameters("localhost", 5672, "/", credentials)

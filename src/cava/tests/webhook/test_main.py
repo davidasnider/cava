@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 import json
 
 
-def test_write_weather(weather_json, set_environ):
+def test_write_weather(weather_json):
     from cava.webhook.main import app  # Import here to get environment vars
 
     client = TestClient(app)
@@ -14,7 +14,7 @@ def test_write_weather(weather_json, set_environ):
     assert response.status_code == 200  # nosec
 
 
-def test_write_motion(amcrest_json, set_environ):
+def test_write_motion(amcrest_json):
     from cava.webhook.main import app  # Import here to get environment vars
 
     client = TestClient(app)

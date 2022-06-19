@@ -3,7 +3,9 @@ import os
 import time
 import pika
 import subprocess
-from dotenv import load_dotenv
+from cava.models.settings import Settings
+
+settings = Settings()
 
 
 @pytest.fixture
@@ -16,26 +18,18 @@ def amcrest_json():
 def weather_json():
     valid_json = {
         "current_conditions": {
-            "precipitation": 0.0,
-            "precipitation_type": "none",
-            "weather_code": "clear",
-            "temp": 32.94,
-            "visibility": 6.21,
-            "cloud_cover": 0.0,
-            "cloud_base": None,
-            "cloud_ceiling": None,
-            "observation_time": "2020-11-29T19:10:49.123000+00:00",
+            "temperature": "20.0",
+            "humidity": "50.0",
+            "snowIntensity": "0.0",
+            "precipitationType": "Snow",
+            "snowAccumulation": "0.0",
         },
         "future_conditions": {
-            "precipitation": 0.0,
-            "precipitation_type": "none",
-            "weather_code": "clear",
-            "temp": 34.59,
-            "visibility": 6.21,
-            "cloud_cover": 0.0,
-            "cloud_base": None,
-            "cloud_ceiling": None,
-            "observation_time": "2020-11-29T20:10:49.123000+00:00",
+            "temperature": "20.0",
+            "humidity": "50.0",
+            "snowIntensity": "0.0",
+            "precipitationType": "Snow",
+            "snowAccumulation": "0.0",
         },
     }
     return valid_json
@@ -51,34 +45,33 @@ def monkeypatch_session():
     m.undo()
 
 
+# @pytest.fixture(scope="session")
+# def set_environ(monkeypatch_session):
+#     # First grab from the .env file if it exists
+
+#     print(os.getenv("INDIGO_USER"))
+
+#     # Now overwrite stuff for testing
+#     monkeypatch_session.setenv("RABBITMQ_DEFAULT_USER", "guest")
+#     monkeypatch_session.setenv("RABBITMQ_DEFAULT_PASS", "guest")
+#     monkeypatch_session.setenv("RABBITMQ_SERVICE_SERVICE_HOST", "localhost")
+#     monkeypatch_session.setenv("CAVA_URL", "http://localhost:8000")
+#     monkeypatch_session.setenv("CAVA_URI", "/api/v01/motion")
+#     monkeypatch_session.setenv("CAVA_CAMERA", "some-test-camera")
+#     monkeypatch_session.setenv("CAVA_USER", "test-user")
+#     monkeypatch_session.setenv("CAVA_PASSWORD", "test-passwerd")
+#     monkeypatch_session.setenv("TOMORROW_IO_API_KEY", "test-api-key")
+#     monkeypatch_session.setenv("TZ", "America/Denver")
+#     monkeypatch_session.setenv(
+#         "INDIGO_USER", os.getenv("INDIGO_USER")
+#     )  # Weird hack to get this into the test environment
+#     monkeypatch_session.setenv(
+#         "INDIGO_PASS", os.getenv("INDIGO_PASS")
+#     )  # Weird hack to get this into the test environment
+
+
 @pytest.fixture(scope="session")
-def set_environ(monkeypatch_session):
-    # First grab fromt the .env file if it exists
-    load_dotenv()
-
-    print(os.getenv("INDIGO_USER"))
-
-    # Now overwrite stuff for testing
-    monkeypatch_session.setenv("RABBITMQ_DEFAULT_USER", "guest")
-    monkeypatch_session.setenv("RABBITMQ_DEFAULT_PASS", "guest")
-    monkeypatch_session.setenv("RABBITMQ_SERVICE_SERVICE_HOST", "localhost")
-    monkeypatch_session.setenv("CAVA_URL", "http://localhost:8000")
-    monkeypatch_session.setenv("CAVA_URI", "/api/v01/motion")
-    monkeypatch_session.setenv("CAVA_CAMERA", "some-test-camera")
-    monkeypatch_session.setenv("CAVA_USER", "test-user")
-    monkeypatch_session.setenv("CAVA_PASSWORD", "test-passwerd")
-    monkeypatch_session.setenv("TOMORROW_IO_API_KEY", "test-api-key")
-    monkeypatch_session.setenv("TZ", "America/Denver")
-    monkeypatch_session.setenv(
-        "INDIGO_USER", os.getenv("INDIGO_USER")
-    )  # Weird hack to get this into the test environment
-    monkeypatch_session.setenv(
-        "INDIGO_PASS", os.getenv("INDIGO_PASS")
-    )  # Weird hack to get this into the test environment
-
-
-@pytest.fixture(scope="session")
-def setup_module(set_environ):
+def setup_module():
     # Check if container is still running
     subprocess_return = subprocess.run(
         ["lima", "nerdctl", "ps", "-a", "-q"], stdout=subprocess.PIPE
@@ -93,11 +86,11 @@ def setup_module(set_environ):
     command = "lima nerdctl run -d --name rabbitmq-management -p 5672:5672 -p 8080:15672 rabbitmq:3.8.9-management"
     os.system(command)  # nosec (it's for a test)
     timeout = 600
-    default_user = os.getenv("RABBITMQ_DEFAULT_USER")
+    default_user = settings.RABBITMQ_DEFAULT_USER
     print(f"RABBITMQ_DEFAULT_USER = {default_user}")
 
-    userName = os.getenv("RABBITMQ_DEFAULT_USER")
-    password = os.getenv("RABBITMQ_DEFAULT_PASS")
+    userName = settings.RABBITMQ_DEFAULT_USER
+    password = settings.RABBITMQ_DEFAULT_PASS.get_secret_value()
     credentials = pika.PlainCredentials(userName, password)
     parameters = pika.ConnectionParameters(
         "localhost",
