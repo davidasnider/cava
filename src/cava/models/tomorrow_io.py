@@ -1,19 +1,13 @@
 import datetime
 import json
-import os
 
 import cava
 import requests
 from pydantic import BaseModel, Field
+from cava.models.settings import Settings
 
 log = cava.log()
-
-# We need these... if they don't exist, quit
-required_variables = ["TOMORROW_IO_API_KEY", "CAVA_URL"]
-for required_variable in required_variables:
-    if required_variable not in os.environ:
-        log.error(f"Missing required environment variable {required_variable}")
-        exit(1)
+settings = Settings()
 
 
 class individual_observation(BaseModel):
@@ -42,8 +36,11 @@ class weather_observation(BaseModel):
             "startTime": observation_start_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "endTime": observation_end_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "timesteps": ["1h"],
-            "location": [40.571709, -111.791092],  # Our house
-            "timezone": "America/Denver",
+            "location": [
+                settings.TOMORROW_IO_LATITUDE,
+                settings.TOMORROW_IO_LONGITUDE,
+            ],  # Our house
+            "timezone": settings.TZ,
             "fields": list(
                 individual_observation.schema()["properties"].keys()
             ),  # Get the list of fields from the class itself
@@ -52,7 +49,7 @@ class weather_observation(BaseModel):
         header = {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "apikey": os.getenv("TOMORROW_IO_API_KEY"),
+            "apikey": settings.TOMORROW_IO_API_KEY.get_secret_value(),
         }
 
         response = requests.post(
@@ -91,7 +88,7 @@ class weather_observation(BaseModel):
         log.info(f"Future conditions: {self.future_conditions}")
 
     def publish_to_cava(self):
-        url = os.getenv("CAVA_URL")
+        url = settings.CAVA_URL
         uri = "/api/v01/weather"
         header = {
             "Accept": "application/json",
@@ -104,3 +101,17 @@ class weather_observation(BaseModel):
             log.error(
                 f"Failed to publish weather observation to CAVA, error code: {result.status_code}"
             )
+
+    @property
+    def snowing(self):
+        """
+        Returns true if snowIntensity is > 1 inch for the current observation
+        or if future conditions show > 1 inch of accumulation
+
+        see https://docs.tomorrow.io/reference/data-layers-core for the description
+        of the snowIntensity field.
+        """
+        return_value = (self.current_conditions.snow_intensity > 1) or (
+            self.future_conditions.snow_accumulation > 1
+        )
+        return return_value
