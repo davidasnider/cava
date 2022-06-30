@@ -7,7 +7,7 @@ authors = ["David Snider <david@davidsnider.org>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 PyYAML = "^6.0"
-pika = "^1.2.0"
+pika = "^1.3.0"
 fastapi = "^0.68.0"
 statsd = "^3.3.0"
 arrow = "^1.1.1"
