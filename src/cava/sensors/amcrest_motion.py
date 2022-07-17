@@ -18,7 +18,7 @@ url = settings.CAVA_URL
 uri = settings.CAVA_URI
 mycamera = settings.CAVA_CAMERA
 user = settings.CAVA_USER
-password = settings.CAVA_PASSWORD.get_secret_value()
+password = settings.CAMERA_PASS.get_secret_value()
 
 logging.info("Starting Amcrest Sensor")
 camera = AmcrestCamera(mycamera, 80, user, password).camera
