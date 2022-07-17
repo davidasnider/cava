@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     CAVA_URL: AnyHttpUrl  # "http://localhost:8000"
     CAVA_URI: str  # "/api/v01/motion"
     CAVA_CAMERA: str  # "bedroom-cam.thesniderpad.com"
+    CAMERA_PASS: SecretStr  # Camera Password
     CAVA_USER: str  # "admin"
     CAVA_PASSWORD: SecretStr  # Will not show in logs by default
     RABBITMQ_SERVICE_SERVICE_HOST: str  # "127.0.0.1"
