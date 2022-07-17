@@ -80,6 +80,7 @@ class weather_observation(BaseModel):
                     future_conditions=api_future_conditions,
                 )
                 return new_observation
+
             elif response.status_code == 429:
                 print(
                     f"Too many requests retry after {response.headers['Retry-After']} seconds"
@@ -91,8 +92,6 @@ class weather_observation(BaseModel):
                     f"Failed to get weather data from tomorrow.io, error code: {response.status_code}"
                 )
                 time.sleep(60)  # Sleep for 1 minutes
-
-                return None
 
     def log_observation(self):
         log.info(f"Current conditions: {self.current_conditions}")
