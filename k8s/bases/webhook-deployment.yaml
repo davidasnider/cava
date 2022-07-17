@@ -27,21 +27,9 @@ spec:
           "--log-config",
           "/app/cava/logger_config.yaml"
         ]
-        env:
-        - name: RABBITMQ_DEFAULT_USER
-          value: "cava"
-        - name: RABBITMQ_DEFAULT_PASS
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAVA_PASS
-        - name: TOMORROW_IO_API_KEY
-          valueFrom:
-            secretKeyRef:
-              key: TOMORROW_IO_API_KEY
-              name: cava-passwords
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         resources:
           limits:
             memory: "128Mi"
