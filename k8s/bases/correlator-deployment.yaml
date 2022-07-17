@@ -18,15 +18,11 @@ spec:
         command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
       containers:
       - name: correlator
-        image: ghcr.io/davidasnider/cava/correlator:latest
-        env:
-        - name: RABBITMQ_DEFAULT_USER
-          value: "cava"
-        - name: RABBITMQ_DEFAULT_PASS
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAVA_PASS
+        image: ghcr.io/davidasnider/cava:latest
+        command: ['python3', '-m', 'cava.correlator.main']
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         resources:
           limits:
             memory: "128Mi"

@@ -15,16 +15,9 @@ spec:
       containers:
       - name: sensor-tomorrow-io
         image: ghcr.io/davidasnider/cava:latest
-        env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_USER
-          value: "admin"
-        - name: TOMORROW_IO_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: TOMORROW_IO_API_KEY
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         resources:
           limits:
             memory: "64Mi"

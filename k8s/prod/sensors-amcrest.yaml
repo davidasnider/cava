@@ -16,20 +16,12 @@ spec:
       containers:
       - name: sensor-amcrest-driveway
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "driveway-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -56,20 +48,12 @@ spec:
       containers:
       - name: sensor-amcrest-hottub
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "hottub-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -95,20 +79,12 @@ spec:
       containers:
       - name: sensor-amcrest-sideyard
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "sideyard-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -134,20 +110,12 @@ spec:
       containers:
       - name: sensor-amcrest-backyard
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "backyard-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -173,20 +141,12 @@ spec:
       containers:
       - name: sensor-amcrest-kitchen
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "kitchen-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -212,20 +172,12 @@ spec:
       containers:
       - name: sensor-amcrest-diningroom
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "diningroom-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -251,20 +203,12 @@ spec:
       containers:
       - name: sensor-amcrest-livingroom
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "livingroom-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -290,20 +234,12 @@ spec:
       containers:
       - name: sensor-amcrest-bedroom
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "bedroom-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -329,20 +265,12 @@ spec:
       containers:
       - name: sensor-amcrest-bedroomdoor
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "bedroomdoor-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -368,20 +296,12 @@ spec:
       containers:
       - name: sensor-amcrest-basement
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "basement-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"
@@ -407,20 +327,12 @@ spec:
       containers:
       - name: sensor-amcrest-basementpatio
         image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         env:
-        - name: CAVA_URL
-          value: "http://cava.thesniderpad.com:8000"
-        - name: CAVA_URI
-          value: "/api/v01/motion"
         - name: CAVA_CAMERA
           value: "basementpatio-cam.thesniderpad.com"
-        - name: CAVA_USER
-          value: "admin"
-        - name: CAVA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAMERA_PASS
         resources:
           limits:
             memory: "64Mi"

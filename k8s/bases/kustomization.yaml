@@ -11,4 +11,8 @@ resources:
 - webhook-service.yaml
 - correlator-deployment.yaml
 - runner-deployment.yaml
-- secrets.yaml
+
+secretGenerator:
+  - name: cava-passwords
+    envs:
+    - .env

@@ -16,14 +16,9 @@ spec:
       containers:
       - name: rabbitmq
         image: docker.io/rabbitmq:3.8.9-management-alpine
-        env:
-        - name: RABBITMQ_DEFAULT_USER
-          value: "cava"
-        - name: RABBITMQ_DEFAULT_PASS
-          valueFrom:
-            secretKeyRef:
-              name: cava-passwords
-              key: CAVA_PASS
+        envFrom:
+        - secretRef:
+            name: cava-passwords
         resources:
           limits:
             memory: "256Mi"
