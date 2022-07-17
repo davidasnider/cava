@@ -11,4 +11,4 @@ while True:  # We're gonna run forever!!!!
 
     # Pass the result to Cava and then sleep
     current_observation.publish_to_cava()
-    time.sleep(60)
+    time.sleep(300)  # Sleep for 5 minutes

@@ -1,10 +1,11 @@
 import datetime
 import json
+import time
 
 import cava
 import requests
-from pydantic import BaseModel, Field
 from cava.models.settings import Settings
+from pydantic import BaseModel, Field
 
 log = cava.log()
 settings = Settings()
@@ -52,36 +53,46 @@ class weather_observation(BaseModel):
             "apikey": settings.TOMORROW_IO_API_KEY.get_secret_value(),
         }
 
-        response = requests.post(
-            api_url, data=json.dumps(payload_defaults), headers=header
-        )
-
-        if response.ok:
-
-            # Get to just the interval data that we want.
-            my_weather_data_raw = response.json()["data"]["timelines"][0]["intervals"]
-
-            # Get the current conditions
-            api_current_conditions = individual_observation(
-                **my_weather_data_raw[0]["values"]
+        while True:  # Just keep trying until we get a response
+            response = requests.post(
+                api_url, data=json.dumps(payload_defaults), headers=header
             )
 
-            # Get the future conditions
-            api_future_conditions = individual_observation(
-                **my_weather_data_raw[1]["values"]
-            )
+            if response.ok:
 
-            new_observation = weather_observation(
-                current_conditions=api_current_conditions,
-                future_conditions=api_future_conditions,
-            )
-            return new_observation
+                # Get to just the interval data that we want.
+                my_weather_data_raw = response.json()["data"]["timelines"][0][
+                    "intervals"
+                ]
 
-        else:
-            log.error(
-                f"Failed to get weather data from tomorrow.io, error code: {response.status_code}"
-            )
-            return None
+                # Get the current conditions
+                api_current_conditions = individual_observation(
+                    **my_weather_data_raw[0]["values"]
+                )
+
+                # Get the future conditions
+                api_future_conditions = individual_observation(
+                    **my_weather_data_raw[1]["values"]
+                )
+
+                new_observation = weather_observation(
+                    current_conditions=api_current_conditions,
+                    future_conditions=api_future_conditions,
+                )
+                return new_observation
+            elif response.status_code == 429:
+                print(
+                    f"Too many requests retry after {response.headers['Retry-After']} seconds"
+                )
+                # Sleep for how long the Retry-After header tells us, plus one second
+                time.sleep(int(response.headers["Retry-After"]) + 1)
+            else:
+                log.error(
+                    f"Failed to get weather data from tomorrow.io, error code: {response.status_code}"
+                )
+                time.sleep(60)  # Sleep for 1 minutes
+
+                return None
 
     def log_observation(self):
         log.info(f"Current conditions: {self.current_conditions}")
