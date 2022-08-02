@@ -22,7 +22,7 @@ uvicorn = "^0.18.2"
 pytest = "^7.0.0"
 bandit = "^1.7.0"
 black = "^22.6"
-flake8 = "^4.0.1"
+flake8 = "^5.0.3"
 python-dotenv = "^0.19.2"
 
 [build-system]
