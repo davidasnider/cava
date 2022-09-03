@@ -16,8 +16,8 @@ class indigo_executor(BaseModel):
     uri: str
     success: bool = False
     host: HttpUrl = settings.INDIGO_URL
-    user: str = settings.INDIGO_USER
-    password: str = settings.INDIGO_PASS.get_secret_value()
+    user: str = settings.indigo_username
+    # password: str = settings.indigo_password.get_secret_value()
 
     @property
     def url(self):
@@ -27,7 +27,9 @@ class indigo_executor(BaseModel):
     def execute_action(self):
         print("User: ", self.user)
         r = requests.request(
-            "EXECUTE", self.url, auth=HTTPDigestAuth(self.user, self.password)
+            "EXECUTE",
+            self.url,
+            auth=HTTPDigestAuth(self.user, settings.indigo_password.get_secret_value()),
         )
         if r.ok:
             self.success = True
