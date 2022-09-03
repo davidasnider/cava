@@ -346,7 +346,7 @@ jobs:
     steps:
       - uses: hmarr/auto-approve-action@v2.4.0
         with:
-          github-token: "${{ secrets.CR_PAT }}"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
 
   label-pr:
     runs-on: ubuntu-latest
