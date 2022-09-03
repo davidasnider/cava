@@ -1,8 +1,8 @@
 import pika
-import cava
+from cava import log
 from cava.models.settings import Settings
 
-log = cava.log()
+log = log()
 settings = Settings()
 
 
