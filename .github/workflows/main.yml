@@ -232,7 +232,7 @@ jobs:
       - name: Set version tags primary container
         id: build-prep-primary-container
         run: |
-          DOCKER_IMAGE=ghcr.io/davidasnider/cava
+          DOCKER_IMAGE=ghcr.io/davidasnider/cava/primary
           VERSION=noop
           if [[ $GITHUB_REF == refs/pull/* ]]; then
             VERSION="v1.0.${{ github.event.number }}"
