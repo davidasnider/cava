@@ -12,7 +12,7 @@ resources:
 commonLabels:
   env: dev
 images:
-- name: ghcr.io/davidasnider/cava
+- name: ghcr.io/davidasnider/cava/primary
   newTag: v1.0.194
 - name: ghcr.io/davidasnider/cava/amcrest-motion
   newTag: v1.0.194

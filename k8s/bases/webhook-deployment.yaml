@@ -18,7 +18,7 @@ spec:
         command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
       containers:
       - name: webhook
-        image: ghcr.io/davidasnider/cava:latest
+        image: ghcr.io/davidasnider/cava/primary:latest
         command: [
           "uvicorn",
           "--host",
