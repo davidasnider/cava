@@ -18,7 +18,7 @@ spec:
         command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
       containers:
       - name: runner
-        image: ghcr.io/davidasnider/cava:latest
+        image: ghcr.io/davidasnider/cava/primary:latest
         command: ['python3', '-m', 'cava.runner.main']
         envFrom:
         - secretRef:

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sensor-tomorrow-io
-        image: ghcr.io/davidasnider/cava:latest
+        image: ghcr.io/davidasnider/cava/primary:latest
         envFrom:
         - secretRef:
             name: cava-passwords
