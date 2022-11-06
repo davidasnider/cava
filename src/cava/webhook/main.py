@@ -23,7 +23,7 @@ publisher = Publisher()
 @app.put("/api/v01/motion")
 async def motion(motion: amcrest_motion):
     """
-    Accepts
+    Accepts motion inputs
     """
     log.info(f"Received motion from {motion.camera}")
     str_obj = motion.json()

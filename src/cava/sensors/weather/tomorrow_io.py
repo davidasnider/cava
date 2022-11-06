@@ -1,11 +1,10 @@
-import cava
+from cava import log
 from cava.models.tomorrow_io import weather_observation
 import time
 
-log = cava.log()
-
+log = log()
+log.info("Starting tomorrow.io sensor")
 while True:  # We're gonna run forever!!!!
-    log.info("Getting forecast data from tomorrow.io")
     current_observation = weather_observation.create_from_live_data()
     current_observation.log_observation()
 

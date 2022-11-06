@@ -32,4 +32,3 @@ class Settings(BaseSettings):
     class Config:
         # Read everything from .env
         env_file = ".env"
-        env_file_encoding = "utf-8"
