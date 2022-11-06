@@ -37,7 +37,7 @@ async def weather(weather: weather_observation):
     See model definition for fields
     """
     log.info("Received weather forecast")
-    str_obj = weather.json()
+    str_obj = weather.json(by_alias=True)
     log.debug(f"Weather object received: {weather}")
     publisher.publish(str_obj, "incoming.weather")
 
