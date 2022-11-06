@@ -25,7 +25,6 @@ class indigo_executor(BaseModel):
 
     # Run the activity specified
     def execute_action(self):
-        print("User: ", self.user)
         r = requests.request(
             "EXECUTE",
             self.url,
