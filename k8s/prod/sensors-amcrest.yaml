@@ -16,7 +16,7 @@ spec:
       containers:
       - name: sensor-amcrest-driveway
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -49,7 +49,7 @@ spec:
       containers:
       - name: sensor-amcrest-hottub
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -81,7 +81,7 @@ spec:
       containers:
       - name: sensor-amcrest-sideyard
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -113,7 +113,7 @@ spec:
       containers:
       - name: sensor-amcrest-backyard
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -145,7 +145,7 @@ spec:
       containers:
       - name: sensor-amcrest-kitchen
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -177,7 +177,7 @@ spec:
       containers:
       - name: sensor-amcrest-diningroom
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -209,7 +209,7 @@ spec:
       containers:
       - name: sensor-amcrest-livingroom
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -241,7 +241,7 @@ spec:
       containers:
       - name: sensor-amcrest-bedroom
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -273,7 +273,7 @@ spec:
       containers:
       - name: sensor-amcrest-bedroomdoor
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -305,7 +305,7 @@ spec:
       containers:
       - name: sensor-amcrest-basement
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
@@ -337,7 +337,7 @@ spec:
       containers:
       - name: sensor-amcrest-basementpatio
         image: ghcr.io/davidasnider/cava/primary:latest
-        command: ['python3', '-m', 'cava.sensors.amcrest-motion']
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         envFrom:
         - secretRef:
             name: cava-passwords
