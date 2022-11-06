@@ -14,4 +14,3 @@ commonLabels:
 images:
 - name: ghcr.io/davidasnider/cava/primary
   newTag: v1.0.217
-
