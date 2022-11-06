@@ -1,45 +1,41 @@
-from cava.models.climacell import weather_forecast
+from cava.models.tomorrow_io import weather_observation
 
 import requests
 import time
 
-url = "http://localhost:8000"
+url = "http://cava.thesniderpad.com:8000"
 uri = "/api/v01/weather"
 
 not_snowing = {
     "current_conditions": {
-        "precipitation": 0.0,
-        "precipitation_type": "none",
-        "weather_code": "clear",
-        "temp": 32.94,
-        "visibility": 6.21,
-        "cloud_cover": 0.0,
-        "cloud_base": None,
-        "cloud_ceiling": None,
-        "observation_time": "2020-11-29T19:10:49.123000+00:00",
+        "temperature": 32.94,
+        "humidity": 20.0,
+        "snowIntensity": 0.0,
+        "snowAccumulation": 0.0,
+        "precipitationType": "none",
     },
     "future_conditions": {
-        "precipitation": 0.0,
-        "precipitation_type": "none",
-        "weather_code": "clear",
-        "temp": 34.59,
-        "visibility": 6.21,
-        "cloud_cover": 0.0,
-        "cloud_base": None,
-        "cloud_ceiling": None,
-        "observation_time": "2020-11-29T20:10:49.123000+00:00",
+        "temperature": 32.94,
+        "humidity": 20.0,
+        "snowIntensity": 0.0,
+        "snowAccumulation": 0.0,
+        "precipitationType": "none",
     },
 }
 
 
-my_weather = weather_forecast(**not_snowing)
 x = 1
 while True:
+    my_weather = weather_observation(**not_snowing)
+
     if x % 5 == 0:
+        print("Snowing sent")
         # Make it snow
-        my_weather.current_conditions.weather_code = "snow"
-        my_weather.current_conditions.precipitation = 0.2
-    result = requests.put(url + uri, my_weather.json())
+        my_weather.current_conditions.snow_intensity = 2
+        my_weather.current_conditions.snow_accumulation = 2
+    else:
+        print("Not snowing sent")
+    result = requests.put(url + uri, my_weather.json(by_alias=True))
     time.sleep(1)
     x += 1
 
