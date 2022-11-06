@@ -79,6 +79,9 @@ class weather_observation(BaseModel):
                     current_conditions=api_current_conditions,
                     future_conditions=api_future_conditions,
                 )
+                log.info(
+                    f"Received new observation: Temp - {new_observation.current_conditions.temperature}"
+                )
                 return new_observation
 
             elif response.status_code == 429:

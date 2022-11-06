@@ -1,3 +1,0 @@
-arrow
-pydantic
-pyyaml
