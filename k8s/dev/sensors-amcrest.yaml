@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: sensor-amcrest
-        image: ghcr.io/davidasnider/cava/amcrest-motion:latest
+        image: ghcr.io/davidasnider/cava/primary:latest
+        command: ['python3', '-m', 'cava.sensors.amcrest_motion']
         env:
         - name: CAVA_URL
           value: "http://cava.thesniderpad.com:8000"

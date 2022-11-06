@@ -12,13 +12,5 @@ resources:
 commonLabels:
   env: dev
 images:
-- name: ghcr.io/davidasnider/cava/amcrest-motion
-  newTag: v1.0.198
-- name: ghcr.io/davidasnider/cava/correlator
-  newTag: v1.0.198
 - name: ghcr.io/davidasnider/cava/primary
-  newTag: v1.0.198
-- name: ghcr.io/davidasnider/cava/reader
-  newTag: v1.0.198
-- name: ghcr.io/davidasnider/cava/runner
-  newTag: v1.0.198
+  newTag: v1.0.217

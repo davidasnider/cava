@@ -18,7 +18,8 @@ spec:
         command: ['sh', '-c', 'until nc -zv -w 1 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
       containers:
       - name: correlator
-        image: ghcr.io/davidasnider/cava/correlator:latest
+        image: ghcr.io/davidasnider/cava/primary:latest
+        command: ['python3', '-m', 'cava.correlator.main']
         env:
         - name: RABBITMQ_DEFAULT_USER
           value: "cava"

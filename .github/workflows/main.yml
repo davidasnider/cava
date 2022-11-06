@@ -74,58 +74,6 @@ jobs:
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
-      - name: Set version tags reader
-        id: build-prep-reader
-        run: |
-          DOCKER_IMAGE=ghcr.io/davidasnider/cava/reader
-          VERSION=noop
-          if [[ $GITHUB_REF == refs/pull/* ]]; then
-            VERSION="v1.0.${{ github.event.number }}"
-          fi
-          TAGS="${DOCKER_IMAGE}:${VERSION}"
-          echo ::set-output name=version::${VERSION}
-          echo ::set-output name=tags::${TAGS}
-          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-
-      - name: Set version tags amcrest-motion
-        id: build-prep-amcrest-motion
-        run: |
-          DOCKER_IMAGE=ghcr.io/davidasnider/cava/amcrest-motion
-          VERSION=noop
-          if [[ $GITHUB_REF == refs/pull/* ]]; then
-            VERSION="v1.0.${{ github.event.number }}"
-          fi
-          TAGS="${DOCKER_IMAGE}:${VERSION}"
-          echo ::set-output name=version::${VERSION}
-          echo ::set-output name=tags::${TAGS}
-          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-
-      - name: Set version tags correlator
-        id: build-prep-correlator
-        run: |
-          DOCKER_IMAGE=ghcr.io/davidasnider/cava/correlator
-          VERSION=noop
-          if [[ $GITHUB_REF == refs/pull/* ]]; then
-            VERSION="v1.0.${{ github.event.number }}"
-          fi
-          TAGS="${DOCKER_IMAGE}:${VERSION}"
-          echo ::set-output name=version::${VERSION}
-          echo ::set-output name=tags::${TAGS}
-          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-
-      - name: Set version tags runner
-        id: build-prep-runner
-        run: |
-          DOCKER_IMAGE=ghcr.io/davidasnider/cava/runner
-          VERSION=noop
-          if [[ $GITHUB_REF == refs/pull/* ]]; then
-            VERSION="v1.0.${{ github.event.number }}"
-          fi
-          TAGS="${DOCKER_IMAGE}:${VERSION}"
-          echo ::set-output name=version::${VERSION}
-          echo ::set-output name=tags::${TAGS}
-          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-
       - name: Check out code
         uses: actions/checkout@v3.1.0
         with:
@@ -143,19 +91,11 @@ jobs:
 
           # Do dev image updates
           cd ../dev
-          kustomize edit set image ${{ steps.build-prep-reader.outputs.tags }}
-          kustomize edit set image ${{ steps.build-prep-amcrest-motion.outputs.tags }}
-          kustomize edit set image ${{ steps.build-prep-correlator.outputs.tags }}
-          kustomize edit set image ${{ steps.build-prep-runner.outputs.tags }}
           kustomize edit set image ${{ steps.build-prep-primary-container.outputs.tags }}
           cat kustomization.yaml
 
           # Do prod image updates
           cd ../prod
-          kustomize edit set image ${{ steps.build-prep-reader.outputs.tags }}
-          kustomize edit set image ${{ steps.build-prep-amcrest-motion.outputs.tags }}
-          kustomize edit set image ${{ steps.build-prep-correlator.outputs.tags }}
-          kustomize edit set image ${{ steps.build-prep-runner.outputs.tags }}
           kustomize edit set image ${{ steps.build-prep-primary-container.outputs.tags }}
           cat kustomization.yaml
 

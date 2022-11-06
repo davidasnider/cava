@@ -18,7 +18,7 @@ spec:
 
       containers:
       - name: reader
-        image: ghcr.io/davidasnider/cava/reader:latest
+        image: ghcr.io/davidasnider/cava/primary:latest
         resources:
           limits:
             memory: "128Mi"
