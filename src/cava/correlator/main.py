@@ -15,7 +15,6 @@ our_tracked_events = tracked_events(rules)
 
 
 def callback(ch, method, properties, body):
-
     log.debug(f"Received {body} on routing_key {method.routing_key}")
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -26,7 +25,6 @@ def callback(ch, method, properties, body):
 
 
 def main():
-
     # Instantiate our receiver object
     receiver = Receiver(routingKey="incoming.*", queue_name="correlator")
 

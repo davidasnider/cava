@@ -11,7 +11,6 @@ with open(LOGGING_CONFIG) as f:
 
 # get root logger
 def log():
-
     return logging.getLogger(__name__)
     # the __name__ resolve to "main" since we are at the root of the project
     # This will get the root logger since no logger in the configuration has this name.
