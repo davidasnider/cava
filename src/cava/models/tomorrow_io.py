@@ -59,7 +59,6 @@ class weather_observation(BaseModel):
             )
 
             if response.ok:
-
                 # Get to just the interval data that we want.
                 my_weather_data_raw = response.json()["data"]["timelines"][0][
                     "intervals"
