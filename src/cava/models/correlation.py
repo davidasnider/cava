@@ -90,7 +90,6 @@ class tracked_events:
         log.info(f"deleted {x} expired events")
 
     def process_rules(self) -> bool:
-
         # Run trigger rules against current item
         for rule in self.rules:
             if rule.type == rule_types.trigger:

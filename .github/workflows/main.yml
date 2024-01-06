@@ -9,7 +9,7 @@ jobs:
   build-name:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.1.0
+      - uses: actions/checkout@v4.1.1
       - name: Branch name
         run: echo running on branch ${{ github.event.pull_request.head.ref }}
 
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v4.1.1
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2.1.0
@@ -46,7 +46,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Build and push build-primary-container
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: ./src/cava/
           file: ./src/cava/Dockerfile
@@ -75,7 +75,7 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Check out code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
 
@@ -138,6 +138,6 @@ jobs:
       - label-pr
     steps:
       - name: automerge
-        uses: "pascalgn/automerge-action@v0.15.5"
+        uses: "pascalgn/automerge-action@v0.15.6"
         env:
           GITHUB_TOKEN: "${{ secrets.CR_PAT }}"

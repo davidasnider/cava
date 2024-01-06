@@ -7,7 +7,6 @@ log = cava.log()
 
 
 def callback(ch, method, properties, body):
-
     log.debug(f"Received {body} on routing_key {method.routing_key}")
     log.info(f"executing action {body.decode()}")
     # ack the message
