@@ -43,7 +43,7 @@ class weather_observation(BaseModel):
             ],  # Our house
             "timezone": settings.TZ,
             "fields": list(
-                individual_observation.schema()["properties"].keys()
+                individual_observation.model_json_schema()["properties"].keys()
             ),  # Get the list of fields from the class itself
         }
         api_url = "https://api.tomorrow.io/v4/timelines/"
