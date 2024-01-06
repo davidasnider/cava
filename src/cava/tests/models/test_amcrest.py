@@ -4,7 +4,6 @@ import pydantic
 
 
 def test_amcrest_valid_json(amcrest_json):
-
     valid_amcrest = event(**amcrest_json)
     assert valid_amcrest.index == 1
 

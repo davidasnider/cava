@@ -9,10 +9,8 @@ settings = Settings()
 
 
 class Publisher:
-
     # Configuration parameters for RabbitMQ
     def __init__(self):
-
         self._config = {
             "exchangeName": "message_exchange",
             "userName": settings.RABBITMQ_DEFAULT_USER,
