@@ -15,7 +15,7 @@ class individual_observation(BaseModel):
     temperature: float
     humidity: float
     snow_intensity: float = Field(..., alias="snowIntensity")  # API is in camelCase
-    precipitation_type: str = Field(..., alias="precipitationType")
+    precipitation_type: int = Field(..., alias="precipitationType")
     snow_accumulation: float = Field(..., alias="snowAccumulation")
 
 

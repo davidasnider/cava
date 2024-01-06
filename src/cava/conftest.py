@@ -21,14 +21,14 @@ def weather_json():
             "temperature": "20.0",
             "humidity": "50.0",
             "snowIntensity": "0.0",
-            "precipitationType": "Snow",
+            "precipitationType": 2,  # 2 = Snow
             "snowAccumulation": "0.0",
         },
         "future_conditions": {
             "temperature": "20.0",
             "humidity": "50.0",
             "snowIntensity": "0.0",
-            "precipitationType": "Snow",
+            "precipitationType": 2,  # 2 = Snow
             "snowAccumulation": "0.0",
         },
     }
