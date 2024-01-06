@@ -10,7 +10,7 @@ settings = Settings()
 
 @pytest.fixture
 def amcrest_json():
-    valid_json = {"code": "one", "action": "one", "index": 1, "camera": "one"}
+    valid_json = {"Code": "one", "action": "one", "index": 1, "camera": "one"}
     return valid_json
 
 

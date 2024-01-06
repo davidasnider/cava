@@ -1,12 +1,11 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, Field
 
 
 class event(BaseModel):
-    code: Optional[str]
-    action: Optional[str]
-    index: Optional[int]
-    camera: Optional[str]
+    code: str = Field(alias="Code")
+    action: str
+    index: int
+    camera: str
 
     def ttl(self):
         return 600  # 600 Seconds
