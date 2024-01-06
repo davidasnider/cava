@@ -1,5 +1,6 @@
-from pydantic import BaseSettings, SecretStr
+from pydantic import SecretStr
 from pydantic import AnyHttpUrl
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -29,6 +30,4 @@ class Settings(BaseSettings):
     TOMORROW_IO_LATITUDE: float
     TOMORROW_IO_LONGITUDE: float
 
-    class Config:
-        # Read everything from .env
-        env_file = ".env"
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
