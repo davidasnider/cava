@@ -2,7 +2,7 @@ from cava.runner.actions import action, actions, indigo_executor, influxdb_execu
 
 
 # Create executors that do a thing
-indigo_turn_on_driveway = indigo_executor(uri="/actions/Melt%20Driveway%201%20Hour")
+indigo_turn_on_driveway = indigo_executor(action_group_id=1834713357)
 metrics_turn_on_driveway = influxdb_executor(
     metric_name="cava_turn_on_driveway", metric=1
 )
