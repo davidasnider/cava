@@ -8,7 +8,7 @@ authors = ["David Snider <david@davidsnider.org>"]
 python = "^3.9"
 PyYAML = "^6.0"
 pika = "^1.3.1"
-fastapi = "^0.87.0"
+fastapi = "^0.108.0"
 statsd = "^4.0.1"
 arrow = "^1.2.3"
 rule-engine = "^3.5.0"
@@ -21,7 +21,7 @@ uvicorn = "^0.20.0"
 [tool.poetry.dev-dependencies]
 pytest = "^7.0.0"
 bandit = "^1.7.0"
-black = "^22.10"
+black = "^23.12"
 flake8 = "^6.0.0"
 python-dotenv = "^0.21.0"
 
