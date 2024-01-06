@@ -23,8 +23,7 @@ class Settings(BaseSettings):
     RABBITMQ_DEFAULT_USER: str
     RABBITMQ_DEFAULT_PASS: SecretStr
     TZ: str  # "America/Denver"
-    indigo_username: str  #
-    indigo_password: SecretStr  # Will not show in logs by default
+    indigo_api_key: SecretStr
     INDIGO_URL: AnyHttpUrl  # URL of our Indigo API
     TOMORROW_IO_API_KEY: SecretStr
     TOMORROW_IO_LATITUDE: float

@@ -1,10 +1,10 @@
 import requests
 from pydantic import BaseModel, HttpUrl
 from typing import Union, List, Optional
-from requests.auth import HTTPDigestAuth
 import statsd
 import cava
 from cava.models.settings import Settings
+import json
 
 
 log = cava.log()
@@ -13,22 +13,25 @@ settings = Settings()
 
 # This will let us execute an action against indigo
 class indigo_executor(BaseModel):
-    uri: str
+    action_group_id: int
     success: bool = False
     host: HttpUrl = settings.INDIGO_URL
-    user: str = settings.indigo_username
-    # password: str = settings.indigo_password.get_secret_value()
 
     @property
     def url(self):
-        return f"{self.host}{self.uri}"
+        return f"{self.host}v2/api/command"
 
     # Run the activity specified
     def execute_action(self):
-        r = requests.request(
-            "EXECUTE",
-            self.url,
-            auth=HTTPDigestAuth(self.user, settings.indigo_password.get_secret_value()),
+        execute_action_group_message = {
+            "message": "indigo.actionGroup.execute",
+            "objectId": self.action_group_id,
+        }
+        headers = {
+            "Authorization": f"Bearer {settings.indigo_api_key.get_secret_value()}"
+        }
+        r = requests.post(
+            self.url, headers=headers, data=json.dumps(execute_action_group_message)
         )
         if r.ok:
             self.success = True
