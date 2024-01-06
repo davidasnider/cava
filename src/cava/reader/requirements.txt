@@ -1,4 +1,4 @@
-Flask==1.1.2
+Flask==2.2.5
 Flask-API==2.0
 gunicorn==20.0.4
 pika==1.1.0
