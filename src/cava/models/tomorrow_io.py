@@ -101,12 +101,14 @@ class weather_observation(BaseModel):
 
     def publish_to_cava(self):
         url = settings.CAVA_URL
-        uri = "/api/v01/weather"
+        uri = "api/v01/weather"
         header = {
             "Accept": "application/json",
             "Content-Type": "application/json",
         }
-        result = requests.put(url + uri, data=self.json(by_alias=True), headers=header)
+        result = requests.put(
+            str(url) + uri, data=self.model_dump_json(by_alias=True), headers=header
+        )
         if result.ok:
             log.info("Published weather observation to CAVA")
         else:
