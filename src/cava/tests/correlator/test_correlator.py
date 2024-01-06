@@ -13,7 +13,7 @@ def test_event_details_snowing(setup_module, weather_json):
     re_rule = rule_engine.Rule("model.snowing", context=context)
     my_rule = base_rule(re_rule, "turn_on_driveway_heater", rule_types.trigger)
     rules = [my_rule]
-    weather_json["current_conditions"]["precipitationType"] = "snow"
+    weather_json["current_conditions"]["precipitationType"] = 2  # 2 = Snow
     weather_json["current_conditions"]["snowIntensity"] = 1.5
     test_event = event_details(
         "incoming.weather", str(json.dumps(weather_json)).encode()
