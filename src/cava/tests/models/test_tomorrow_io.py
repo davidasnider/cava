@@ -1,6 +1,6 @@
 from cava.models.tomorrow_io import weather_observation
+from pydantic import ValidationError
 import pytest
-import pydantic
 
 
 def test_weather_observation_good(weather_json):
@@ -11,7 +11,7 @@ def test_weather_observation_good(weather_json):
 def test_weather_missing_field(weather_json):
     del weather_json["current_conditions"]["humidity"]
 
-    with pytest.raises(pydantic.error_wrappers.ValidationError):
+    with pytest.raises(ValidationError):
         weather_observation(**weather_json)
 
 
