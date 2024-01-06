@@ -24,19 +24,16 @@ device = camera.machine_name.rstrip()
 log.info(f"Connected to {device} on {mycamera}")
 
 
+def convert_to_dict(kv_list):
+    return {item.split("=")[0]: item.split("=")[1] for item in kv_list}
+
+
 for event in camera.event_stream("VideoMotion"):
     event = event.rstrip().strip()  # Get rid of carriage returns
     parsed_event = event.split(";")
-    my_event = amcrest_event()
-    my_event.camera = mycamera
-    for item in parsed_event:
-        element = item.split("=")
-        if element[0].lower() == "code":
-            my_event.code = element[1]
-        if element[0].lower() == "action":
-            my_event.action = element[1]
-        if element[0].lower() == "index":
-            my_event.index = element[1]
+    dict_event = convert_to_dict(parsed_event)
+    dict_event["camera"] = mycamera
+    my_event = amcrest_event(**dict_event)
     log.info(f"{my_event}")
 
-    result = requests.put(url + uri, my_event.json())
+    result = requests.put(str(url) + uri, my_event.model_dump_json())
