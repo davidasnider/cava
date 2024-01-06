@@ -26,7 +26,7 @@ async def motion(motion: amcrest_motion):
     Accepts motion inputs
     """
     log.info(f"Received motion from {motion.camera}")
-    str_obj = motion.json()
+    str_obj = motion.model_dump_json()
     log.debug(f"motion object received: {motion}")
     publisher.publish(str_obj, "incoming.motion")
 
@@ -37,7 +37,7 @@ async def weather(weather: weather_observation):
     See model definition for fields
     """
     log.info("Received weather forecast")
-    str_obj = weather.json(by_alias=True)
+    str_obj = weather.model_dump_json(by_alias=True)
     log.debug(f"Weather object received: {weather}")
     publisher.publish(str_obj, "incoming.weather")
 

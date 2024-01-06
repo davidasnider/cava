@@ -12,14 +12,14 @@ not_snowing = {
         "humidity": 20.0,
         "snowIntensity": 0.0,
         "snowAccumulation": 0.0,
-        "precipitationType": "none",
+        "precipitationType": 0,
     },
     "future_conditions": {
         "temperature": 32.94,
         "humidity": 20.0,
         "snowIntensity": 0.0,
         "snowAccumulation": 0.0,
-        "precipitationType": "none",
+        "precipitationType": 0,
     },
 }
 
