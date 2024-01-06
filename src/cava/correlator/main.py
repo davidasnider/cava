@@ -6,6 +6,8 @@ from cava.models.correlation import (
 from cava.correlator.rules import rules
 import time
 import cava
+from pika.exceptions import AMQPConnectionError
+
 
 log = cava.log()
 
@@ -16,12 +18,13 @@ our_tracked_events = tracked_events(rules)
 
 def callback(ch, method, properties, body):
     log.debug(f"Received {body} on routing_key {method.routing_key}")
-    ch.basic_ack(delivery_tag=method.delivery_tag)
 
     # instantiate the appropriate class
     this_event_details = event_details(routingKey=method.routing_key, body=body)
 
     our_tracked_events.add_event(this_event_details)
+
+    ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def main():
@@ -33,8 +36,8 @@ def main():
     while retries < 5:
         try:
             receiver.connect()
-        except Exception as e:
-            log.info("rabbitmq connection failed, retry in 5 seconds")
+        except AMQPConnectionError as e:
+            log.warning("rabbitmq connection failed, retry in 5 seconds")
             log.debug(f"exception is {e}")
             time.sleep(5)
             retries += 1
@@ -42,10 +45,10 @@ def main():
             break
 
     if retries == 5:
-        log.info("Unable to connect to rabbitmq, quitting")
+        log.error("Unable to connect to rabbitmq, quitting")
         exit()
 
-    # Start processing messages
+    # Start processing messagessdk
     receiver.consume(callback)
 
 
