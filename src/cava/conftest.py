@@ -45,31 +45,6 @@ def monkeypatch_session():
     m.undo()
 
 
-# @pytest.fixture(scope="session")
-# def set_environ(monkeypatch_session):
-#     # First grab from the .env file if it exists
-
-#     print(os.getenv("INDIGO_USER"))
-
-#     # Now overwrite stuff for testing
-#     monkeypatch_session.setenv("RABBITMQ_DEFAULT_USER", "guest")
-#     monkeypatch_session.setenv("RABBITMQ_DEFAULT_PASS", "guest")
-#     monkeypatch_session.setenv("RABBITMQ_SERVICE_SERVICE_HOST", "localhost")
-#     monkeypatch_session.setenv("CAVA_URL", "http://localhost:8000")
-#     monkeypatch_session.setenv("CAVA_URI", "/api/v01/motion")
-#     monkeypatch_session.setenv("CAVA_CAMERA", "some-test-camera")
-#     monkeypatch_session.setenv("CAVA_USER", "test-user")
-#     monkeypatch_session.setenv("CAVA_PASSWORD", "test-passwerd")
-#     monkeypatch_session.setenv("TOMORROW_IO_API_KEY", "test-api-key")
-#     monkeypatch_session.setenv("TZ", "America/Denver")
-#     monkeypatch_session.setenv(
-#         "INDIGO_USER", os.getenv("INDIGO_USER")
-#     )  # Weird hack to get this into the test environment
-#     monkeypatch_session.setenv(
-#         "INDIGO_PASS", os.getenv("INDIGO_PASS")
-#     )  # Weird hack to get this into the test environment
-
-
 @pytest.fixture(scope="session")
 def setup_module():
     # Check if container is still running
