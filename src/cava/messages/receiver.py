@@ -7,10 +7,8 @@ settings = Settings()
 
 
 class Receiver:
-
     # Configuration parameters for RabbitMQ
     def __init__(self, routingKey="incoming.*", queue_name=None):
-
         self._config = {
             "exchangeName": "message_exchange",
             "userName": settings.RABBITMQ_DEFAULT_USER,
@@ -33,7 +31,6 @@ class Receiver:
             exit(255)
 
     def connect(self):
-
         credentials = pika.PlainCredentials(
             self._config["userName"], self._config["password"]
         )
@@ -66,7 +63,6 @@ class Receiver:
         )
 
     def consume(self, callback):
-
         self.callback = callback
         self.channel.basic_consume(
             queue=self.queue_name, on_message_callback=self.callback

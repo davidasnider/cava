@@ -4,7 +4,6 @@ import pydantic
 
 
 def test_weather_observation_good(weather_json):
-
     my_weather_observation = weather_observation(**weather_json)
     assert my_weather_observation.current_conditions.snow_accumulation == 0.0
 
@@ -33,6 +32,5 @@ def test_is_snowing_future_conditions(weather_json):
 
 
 def test_is_not_snowing(weather_json):
-
     snowing_forecast = weather_observation(**weather_json)
     assert snowing_forecast.snowing is False
