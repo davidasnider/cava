@@ -332,6 +332,6 @@ typing-extensions==4.9.0 ; python_version >= "3.9" and python_version < "4.0" \
 urllib3==2.1.0 ; python_version >= "3.9" and python_version < "4.0" \
     --hash=sha256:55901e917a5896a349ff771be919f8bd99aff50b79fe58fec595eb37bbc56bb3 \
     --hash=sha256:df7aa8afb0148fa78488e7899b2c59b5f4ffcfa82e6c54ccb9dd37c1d7b52d54
-uvicorn==0.20.0 ; python_version >= "3.9" and python_version < "4.0" \
-    --hash=sha256:a4e12017b940247f836bc90b72e725d7dfd0c8ed1c51eb365f5ba30d9f5127d8 \
-    --hash=sha256:c3ed1598a5668208723f2bb49336f4509424ad198d6ab2615b7783db58d919fd
+uvicorn==0.25.0 ; python_version >= "3.9" and python_version < "4.0" \
+    --hash=sha256:6dddbad1d7ee0f5140aba5ec138ddc9612c5109399903828b4874c9937f009c2 \
+    --hash=sha256:ce107f5d9bd02b4636001a77a4e74aab5e1e2b146868ebbad565237145af444c

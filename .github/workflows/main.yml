@@ -30,7 +30,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ github.event_name == 'pull_request' && secrets.GITHUB_TOKEN || secrets.GHCR_PAT }}
+          password: ${{ github.event_name == 'pull_request' && secrets.GHCR_PAT || secrets.GITHUB_TOKEN }}
 
       - name: Set version tags
         id: build-prep
