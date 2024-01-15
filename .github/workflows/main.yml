@@ -12,6 +12,22 @@ jobs:
 
   pytest:
     runs-on: ubuntu-latest
+    env:
+      CAVA_URL: null
+      CAVA_URI: null
+      CAVA_CAMERA: null
+      CAMERA_PASS: null
+      CAVA_USER: null
+      CAVA_PASSWORD: null
+      RABBITMQ_SERVICE_SERVICE_HOST: null
+      RABBITMQ_DEFAULT_USER: null
+      RABBITMQ_DEFAULT_PASS: null
+      TZ: null
+      indigo_api_key: null
+      INDIGO_URL: null
+      TOMORROW_IO_API_KEY: null
+      TOMORROW_IO_LATITUDE: null
+      TOMORROW_IO_LONGITUDE: null
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
