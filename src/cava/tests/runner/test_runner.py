@@ -2,8 +2,10 @@ from cava.runner.actions import indigo_executor
 from unittest.mock import patch
 from pydantic import HttpUrl
 from requests.models import Response
+import pytest
 
 
+@pytest.mark.integration
 def test_call_action_group():
     action_group_id = 635158869
     my_executor = indigo_executor(action_group_id=action_group_id)
@@ -11,6 +13,7 @@ def test_call_action_group():
     assert my_executor.success  # This should be true
 
 
+@pytest.mark.integration
 def test_call_action_group_fail():
     action_group_id = 123456789
     my_executor = indigo_executor(action_group_id=action_group_id)
