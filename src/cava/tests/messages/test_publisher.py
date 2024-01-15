@@ -2,6 +2,7 @@ from cava.messages.publisher import Publisher
 import pytest
 
 
+@pytest.mark.integration
 def test_publish_init():
     my_publisher = Publisher()
     assert my_publisher._config["userName"] == "guest"
