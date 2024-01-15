@@ -5,45 +5,95 @@ on:
   push:
     branches: [main]
 
+env:
+  DOCKER_IMAGE: ghcr.io/davidasnider/cava/primary
+
 jobs:
-  build-name:
+
+  pytest:
+    runs-on: ubuntu-latest
+    env:
+      CAVA_URL: http://localhost
+      CAVA_URI: null
+      CAVA_CAMERA: null
+      CAMERA_PASS: null
+      CAVA_USER: null
+      CAVA_PASSWORD: null
+      RABBITMQ_SERVICE_SERVICE_HOST: null
+      RABBITMQ_DEFAULT_USER: null
+      RABBITMQ_DEFAULT_PASS: null
+      TZ: null
+      indigo_api_key: null
+      INDIGO_URL: http://localhost
+      TOMORROW_IO_API_KEY: null
+      TOMORROW_IO_LATITUDE: 1.0
+      TOMORROW_IO_LONGITUDE: 1.0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Install dependencies
+        run: |
+          poetry install
+
+      - name: Run pytest
+        run: poetry run pytest -s -v -m "not integration"
+
+  gitleaks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.1
-      - name: Branch name
-        run: echo running on branch ${{ github.event.pull_request.head.ref }}
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: "0"
+      # Gitleaks check for secrets
+      - name: Gitleaks
+        uses: zricethezav/gitleaks-action@v2.3.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-primary-container:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2.1.0
+        uses: docker/setup-qemu-action@v3.0.0
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ github.event_name == 'pull_request' && secrets.GHCR_PAT || secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set version tags
         id: build-prep
         run: |
-          DOCKER_IMAGE=ghcr.io/davidasnider/cava/primary
           VERSION=noop
           if [[ $GITHUB_REF == refs/pull/* ]]; then
             VERSION=v1.0.${{ github.event.number }}
           fi
-          TAGS="${DOCKER_IMAGE}:${VERSION}"
-          echo ::set-output name=version::${VERSION}
-          echo ::set-output name=tags::${TAGS}
-          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}"
+          echo "TAGS=${DOCKER_IMAGE}:${VERSION}" >> $GITHUB_ENV
+          echo "TAGS=${DOCKER_IMAGE}:${VERSION}"
+          echo "CREATED=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
+          echo "CREATED=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
       - name: Build and push build-primary-container
         uses: docker/build-push-action@v5
@@ -52,28 +102,16 @@ jobs:
           file: ./src/cava/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.build-prep.outputs.tags }}
+          tags: ${{ env.TAGS }}
 
   deploy:
     runs-on: ubuntu-latest
     needs:
-    - build-name
+    - pytest
+    - gitleaks
     - build-primary-container
 
     steps:
-      - name: Set version tags primary container
-        id: build-prep-primary-container
-        run: |
-          DOCKER_IMAGE=ghcr.io/davidasnider/cava/primary
-          VERSION=noop
-          if [[ $GITHUB_REF == refs/pull/* ]]; then
-            VERSION="v1.0.${{ github.event.number }}"
-          fi
-          TAGS="${DOCKER_IMAGE}:${VERSION}"
-          echo ::set-output name=version::${VERSION}
-          echo ::set-output name=tags::${TAGS}
-          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-
       - name: Check out code
         uses: actions/checkout@v4.1.1
         with:
@@ -82,46 +120,68 @@ jobs:
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v2
 
+      - name: Set version tags
+        id: build-prep
+        run: |
+          VERSION=noop
+          if [[ $GITHUB_REF == refs/pull/* ]]; then
+            VERSION=v1.0.${{ github.event.number }}
+          fi
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}"
+          echo "TAGS=${DOCKER_IMAGE}:${VERSION}" >> $GITHUB_ENV
+          echo "TAGS=${DOCKER_IMAGE}:${VERSION}"
+          echo "CREATED=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
+          echo "CREATED=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
       - name: Update kubernetes resources
         run: |
           # Do base image updates
           cd k8s/bases
-          kustomize edit set image ${{ steps.build-prep-primary-container.outputs.tags }}
+          kustomize edit set image ${{ env.TAGS }}
           cat kustomization.yaml
 
           # Do dev image updates
           cd ../dev
-          kustomize edit set image ${{ steps.build-prep-primary-container.outputs.tags }}
+          kustomize edit set image ${{ env.TAGS }}
           cat kustomization.yaml
 
           # Do prod image updates
           cd ../prod
-          kustomize edit set image ${{ steps.build-prep-primary-container.outputs.tags }}
+          kustomize edit set image ${{ env.TAGS }}
           cat kustomization.yaml
 
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -am "Bump docker tag"
+          if [[ `git status --porcelain` ]]; then
+            git commit -am "Bump docker tag"
+          else
+            echo "No changes to commit"
+          fi
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@v0.8.0
         with:
-          github_token: ${{ secrets.CR_PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.event.pull_request.head.ref }}
 
   pr-approve:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     needs:
       - deploy
     steps:
-      - uses: hmarr/auto-approve-action@v3.1.0
+      - uses: hmarr/auto-approve-action@v3.2.1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
   label-pr:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     needs:
       - pr-approve
     steps:
@@ -130,14 +190,17 @@ jobs:
           labels: |
             automerge
         env:
-          GITHUB_TOKEN: ${{ secrets.CR_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   automerge:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
     needs:
       - label-pr
     steps:
       - name: automerge
-        uses: "pascalgn/automerge-action@v0.15.6"
+        uses: "pascalgn/automerge-action@v0.16.2"
         env:
-          GITHUB_TOKEN: "${{ secrets.CR_PAT }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
