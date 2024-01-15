@@ -1,4 +1,5 @@
 import json
+import pytest
 import rule_engine
 from cava.models.correlation import (
     event_details,
@@ -8,6 +9,7 @@ from cava.models.correlation import (
 )
 
 
+@pytest.mark.integration
 def test_event_details_snowing(setup_module, weather_json):
     context = rule_engine.Context(resolver=rule_engine.resolve_attribute)
     re_rule = rule_engine.Rule("model.snowing", context=context)

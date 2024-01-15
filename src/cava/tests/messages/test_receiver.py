@@ -1,12 +1,15 @@
 from cava.messages.receiver import Receiver
 from cava.messages.publisher import Publisher
+import pytest
 
 
+@pytest.mark.integration
 def test_receiver_init():
     my_receiver = Receiver()
     assert my_receiver._config["userName"] == "guest"
 
 
+@pytest.mark.integration
 def test_receive_message():
     test_message = "test message"
     my_receiver = Receiver(routingKey="pytest")
