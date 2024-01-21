@@ -27,26 +27,33 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
+def connect_receiver(receiver, max_retries=5, sleep_time=5):
+    retries = 0
+    e = None  # initialize exception variable
+    while retries < max_retries:
+        try:
+            receiver.connect()
+        except AMQPConnectionError as ex:
+            e = ex  # Assign the exception for return later
+            log.warning("rabbitmq connection failed, retry in 5 seconds")
+            log.debug(f"exception is {e}")
+            time.sleep(sleep_time)
+            retries += 1
+        else:
+            break
+
+    if retries == max_retries:
+        log.error("Unable to connect to rabbitmq, quitting")
+        if e is not None:
+            raise e
+
+
 def main():
     # Instantiate our receiver object
     receiver = Receiver(routingKey="incoming.*", queue_name="correlator")
 
     # Connect to rabbitmq and associate the callback function
-    retries = 0
-    while retries < 5:
-        try:
-            receiver.connect()
-        except AMQPConnectionError as e:
-            log.warning("rabbitmq connection failed, retry in 5 seconds")
-            log.debug(f"exception is {e}")
-            time.sleep(5)
-            retries += 1
-        else:
-            break
-
-    if retries == 5:
-        log.error("Unable to connect to rabbitmq, quitting")
-        exit()
+    connect_receiver(receiver)
 
     # Start processing messagessdk
     receiver.consume(callback)
