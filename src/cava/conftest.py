@@ -35,16 +35,6 @@ def weather_json():
     return valid_json
 
 
-# Setup a session level monkeypatch object
-@pytest.fixture(scope="session")
-def monkeypatch_session():
-    from _pytest.monkeypatch import MonkeyPatch
-
-    m = MonkeyPatch()
-    yield m
-    m.undo()
-
-
 @pytest.fixture(scope="session")
 def setup_module():
     # Check if container is still running
