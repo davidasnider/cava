@@ -7,6 +7,9 @@ from cava.models.correlation import (
     base_rule,
     rule_types,
 )
+from unittest.mock import Mock, patch
+from cava.correlator.main import callback, connect_receiver
+from pika.exceptions import AMQPConnectionError
 
 
 @pytest.mark.integration
@@ -44,3 +47,50 @@ def test_base_rule_string():
     my_rule = base_rule(re_rule, "turn_on_driveway_heater", rule_types.trigger)
     assert my_rule.test == re_rule
     assert my_rule.action == "turn_on_driveway_heater"
+
+
+def test_callback(amcrest_json):
+    # Create mock objects for the parameters
+    ch = Mock()
+    method = Mock()
+    properties = Mock()
+
+    # Set the routing_key attribute of the method mock object
+    method.routing_key = "incoming.motion"
+
+    # Make it a byte string
+    body = str(json.dumps(amcrest_json)).encode()
+
+    # Call the function with the mock objects
+    callback(ch, method, properties, body)
+
+    # Check that the basic_ack method was called on the channel mock object
+    ch.basic_ack.assert_called_once()
+
+
+def test_connect_receiver_success():
+    # Create a mock receiver object
+    receiver = Mock()
+
+    # Call the function with the mock receiver
+    connect_receiver(receiver)
+
+    # Check that the connect method was called on the receiver mock object
+    receiver.connect.assert_called_once()
+
+
+@patch("cava.correlator.main.log")
+def test_connect_receiver_failure(mock_log):
+    # Create a mock receiver object that raises an AMQPConnectionError when connect is called
+    receiver = Mock()
+    receiver.connect.side_effect = AMQPConnectionError
+
+    # Call the function with the mock receiver and check that it raises an AMQPConnectionError
+    with pytest.raises(AMQPConnectionError):
+        connect_receiver(receiver, max_retries=1)
+
+    # Check that the warning and error methods were called on the log mock object
+    mock_log.warning.assert_called_once_with(
+        "rabbitmq connection failed, retry in 5 seconds"
+    )
+    mock_log.error.assert_called_once_with("Unable to connect to rabbitmq, quitting")
