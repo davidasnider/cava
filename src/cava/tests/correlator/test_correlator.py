@@ -8,8 +8,8 @@ from cava.models.correlation import (
     rule_types,
 )
 from unittest.mock import Mock, patch
-from cava.correlator.main import callback, connect_receiver
 from pika.exceptions import AMQPConnectionError
+from cava.correlator.main import main, connect_receiver, callback
 
 
 @pytest.mark.integration
@@ -94,3 +94,27 @@ def test_connect_receiver_failure(mock_log):
         "rabbitmq connection failed, retry in 5 seconds"
     )
     mock_log.error.assert_called_once_with("Unable to connect to rabbitmq, quitting")
+
+
+@patch("cava.correlator.main.Receiver")
+@patch("cava.correlator.main.connect_receiver")
+def test_main(mock_connect_receiver, mock_receiver_class):
+    # Create a mock instance of the Receiver class
+    mock_receiver_instance = Mock()
+
+    # Set the return value of the Receiver class to the mock instance
+    mock_receiver_class.return_value = mock_receiver_instance
+
+    # Call the main function
+    main()
+
+    # Check that the Receiver class was instantiated with the correct parameters
+    mock_receiver_class.assert_called_once_with(
+        routingKey="incoming.*", queue_name="correlator"
+    )
+
+    # Check that connect_receiver was called with the mock receiver instance
+    mock_connect_receiver.assert_called_once_with(mock_receiver_instance)
+
+    # Check that the consume method was called on the mock receiver instance with the callback function
+    mock_receiver_instance.consume.assert_called_once_with(callback)
