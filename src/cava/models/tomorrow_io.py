@@ -53,7 +53,11 @@ class weather_observation(BaseModel):
             "apikey": settings.TOMORROW_IO_API_KEY.get_secret_value(),
         }
 
-        while True:  # Just keep trying until we get a response
+        retry_count = 0
+        max_retries = 3
+        while (
+            retry_count < max_retries
+        ):  # more than 3 tries means something else is wrong
             response = requests.post(
                 api_url, data=json.dumps(payload_defaults), headers=header
             )
@@ -89,11 +93,18 @@ class weather_observation(BaseModel):
                 )
                 # Sleep for how long the Retry-After header tells us, plus one second
                 time.sleep(int(response.headers["Retry-After"]) + 1)
+                retry_count += 1
             else:
                 log.error(
                     f"Failed to get weather data from tomorrow.io, error code: {response.status_code}"
                 )
+                retry_count += 1
                 time.sleep(60)  # Sleep for 1 minutes
+
+            if retry_count == max_retries:
+                raise Exception(
+                    "Exceeded retries attempting to get weather data from tomorrow.io"
+                )
 
     def log_observation(self):
         log.info(f"Current conditions: {self.current_conditions}")

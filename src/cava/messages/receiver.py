@@ -22,14 +22,6 @@ class Receiver:
 
         log.debug(f"RabbitMQ Config: {self._config}")
 
-        if (
-            self._config["userName"] is None
-            or self._config["password"] is None
-            or self._config["host"] is None
-        ):
-            log.warning("You must specify the proper environment variables")
-            exit(255)
-
     def connect(self):
         credentials = pika.PlainCredentials(
             self._config["userName"], self._config["password"]
