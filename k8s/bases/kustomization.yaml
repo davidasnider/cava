@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: ghcr.io/davidasnider/cava/primary
-  newTag: v1.0.299
+  newTag: v1.0.300
 resources:
 - rabbitmq-deployment.yaml
 - rabbitmq-service.yaml
