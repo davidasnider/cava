@@ -13,4 +13,4 @@ commonLabels:
   env: dev
 images:
 - name: ghcr.io/davidasnider/cava/primary
-  newTag: v1.0.318
+  newTag: v1.0.319
