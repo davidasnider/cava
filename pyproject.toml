@@ -16,7 +16,7 @@ rule-engine = "^4.3.1"
 requests = "^2.32.2"
 amcrest = "^1.8.0"
 httpx = "0.27.0"
-uvicorn = "^0.29.0"
+uvicorn = "^0.30.0"
 pydantic-settings = "^2.2.1"
 poetry-plugin-export = "^1.8.0"
 
