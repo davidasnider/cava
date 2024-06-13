@@ -18,4 +18,4 @@ patches:
 - path: loadbalancer-patch-rabbitmq.yaml
 images:
 - name: ghcr.io/davidasnider/cava/primary
-  newTag: v1.0.351
+  newTag: v1.0.352

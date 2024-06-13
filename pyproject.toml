@@ -22,7 +22,7 @@ poetry-plugin-export = "^1.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.2.2"
-bandit = "^1.7.8"
+bandit = "^1.7.9"
 black = "^24.4"
 flake8 = "^7.0.0"
 python-dotenv = "^1.0.1"
