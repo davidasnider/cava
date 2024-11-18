@@ -13,7 +13,7 @@ On every update, a check should be run that
 
 Maybe use a set? To tracked events unique, and then some sort of a TTL to get
 rid of old events being tracked. Every incoming event should run a check to see
-if it's criteria have been met.  If they have, the "action" method should be
+if it's criteria have been met. If they have, the "action" method should be
 run for that particular instance of the class.
 
 Creating a new instance of the class should add the "event to be tracked" to a
