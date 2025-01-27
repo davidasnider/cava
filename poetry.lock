@@ -1759,12 +1759,12 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
 name = "rule-engine"
-version = "4.5.0"
+version = "4.5.1"
 description = "A lightweight, optionally typed expression language with a custom grammar for matching arbitrary Python objects."
 optional = false
 python-versions = "*"
 files = [
-    {file = "rule_engine-4.5.0.tar.gz", hash = "sha256:0aee91bccaf2f336a0b931b4a2c299efec56357c03cd7cba151de064221c3d6b"},
+    {file = "rule_engine-4.5.1.tar.gz", hash = "sha256:7d6c4276ebb208362a07dca437638623e9705abb9b87e9b61a5cf7ba51fee835"},
 ]
 
 [package.dependencies]
@@ -2079,4 +2079,4 @@ test = ["big-O", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more-it
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "5249d1593e865e07ce8210dea74dd1aac3cd47c70fcde919d07642513a6a42a0"
+content-hash = "0a580ac1c6a392764bf25b9aceeff29e39ebfa9f9f1cecc79a22905d23928e70"
